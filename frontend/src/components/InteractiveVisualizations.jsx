@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
+  generateSSTData,
+  generateConfidenceData,
+  generateScatterData,
+  generateTimeSeriesData,
+} from '../utils/dataGenerator';
+import {
   LineChart, Line,
   RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,
   ScatterChart, Scatter,
@@ -21,16 +27,6 @@ const TT_BDR  = '#1e3a5f';
 // ─── Heatmap constants ───────────────────────────────────────────────────────
 const MONTHS  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const REGIONS = ['Arctic','N. Atlantic','N. Pacific','Trop. Atlantic','Trop. Pacific','Indian Ocean','S. Atlantic','Antarctic'];
-const SST_DATA = [
-  [-2,-2,-1, 0, 2, 5, 7, 6, 4, 1,-1,-2],
-  [ 8, 7, 8,10,14,18,21,22,20,16,12, 9],
-  [ 9, 8, 9,12,15,18,20,21,19,15,12,10],
-  [26,26,27,27,28,28,28,28,28,27,27,26],
-  [28,28,29,29,30,30,30,29,29,28,28,28],
-  [27,28,29,30,30,28,26,26,27,28,28,27],
-  [22,21,19,17,14,12,11,12,14,17,19,21],
-  [ 1, 0,-1,-2,-3,-4,-5,-5,-4,-2,-1, 0],
-];
 
 const LEGEND_STOPS = [
   { label: '< 0°C',    color: '#0a1628' },
@@ -66,49 +62,10 @@ const RADAR_DATA = [
   { axis: 'eDNA Coverage',   'Coral Sea': 85, 'North Sea': 70, 'Arabian Sea': 60 },
 ];
 
-// ─── Scatter data (30 pts) ────────────────────────────────────────────────────
-const SC = {
-  Tropical:  [{x:28,y:92},{x:29,y:88},{x:30,y:80},{x:31,y:74},{x:27,y:90},{x:26,y:85},{x:32,y:65},{x:25,y:82}],
-  Temperate: [{x:20,y:78},{x:18,y:72},{x:22,y:76},{x:15,y:65},{x:17,y:70},{x:23,y:74},{x:12,y:58},{x:24,y:80}],
-  Polar:     [{x:2,y:35},{x:-1,y:28},{x:5,y:40},{x:0,y:30},{x:4,y:38},{x:7,y:45},{x:8,y:48}],
-  'Deep Sea':[{x:3,y:22},{x:4,y:18},{x:5,y:25},{x:2,y:20},{x:6,y:30},{x:1,y:15},{x:7,y:32}],
-};
+// All chart data is generated per-session inside the component below
+// Fixed trend line anchor points (shape doesn't change, just contextual)
 const TREND_LINE = [
   {x:-2,y:20},{x:2,y:30},{x:8,y:45},{x:12,y:60},{x:18,y:75},{x:24,y:85},{x:28,y:90},{x:30,y:82},{x:32,y:65},
-];
-
-// ─── Time series ─────────────────────────────────────────────────────────────
-const RAW_TIME = [
-  {year:2015,sst:23.1,co2:2.10,bio:0.91},
-  {year:2016,sst:23.3,co2:2.15,bio:0.90},
-  {year:2017,sst:23.5,co2:2.22,bio:0.89},
-  {year:2018,sst:23.8,co2:2.28,bio:0.88},
-  {year:2019,sst:24.0,co2:2.35,bio:0.87},
-  {year:2020,sst:24.2,co2:2.42,bio:0.86},
-  {year:2021,sst:24.5,co2:2.50,bio:0.85},
-  {year:2022,sst:24.7,co2:2.58,bio:0.84},
-  {year:2023,sst:24.9,co2:2.65,bio:0.83},
-  {year:2024,sst:25.1,co2:2.73,bio:0.82},
-  {year:2025,sst:25.4,co2:2.80,bio:0.81},
-];
-// Normalise to % change from 2015 so all three fit one Y-axis
-const TIME_DATA = RAW_TIME.map(d => ({
-  year: d.year,
-  'SST':         +((d.sst - 23.1) / 23.1 * 100).toFixed(2),
-  'CO₂ Abs.':   +((d.co2 - 2.10) / 2.10 * 100).toFixed(2),
-  'Biodiversity':+((d.bio - 0.91) / 0.91 * 100).toFixed(2),
-  // raw for tooltip
-  _sst: d.sst, _co2: d.co2, _bio: d.bio,
-}));
-
-// ─── Confidence data ──────────────────────────────────────────────────────────
-const CONF = [
-  { name:'North Atlantic', pct:94, prediction:'Fish stock stable, SST +0.3°C expected' },
-  { name:'South Pacific',  pct:91, prediction:'Coral recovery detected in 3 zones' },
-  { name:'Indian Ocean',   pct:87, prediction:'Monsoon pattern shift predicted' },
-  { name:'Arctic',         pct:78, prediction:'Ice coverage declining faster than baseline' },
-  { name:'Mediterranean',  pct:82, prediction:'Invasive species migration detected via eDNA' },
-  { name:'Antarctic',      pct:72, prediction:'Krill population data sparse, confidence limited' },
 ];
 
 // ─── Reusable sub-components ──────────────────────────────────────────────────
@@ -181,9 +138,15 @@ function GenTip({ active, payload, label }) {
 export default function InteractiveVisualizations() {
   const navigate = useNavigate();
   const [heatTip, setHeatTip] = useState(null);
-  const [displayCount, setDisplayCount] = useState(TIME_DATA.length);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
+
+  // Generate all chart data once on mount — values vary each page load
+  const [SST_DATA]  = useState(() => generateSSTData().map(r => r.monthly));
+  const [CONF]      = useState(() => generateConfidenceData());
+  const [SC]        = useState(() => generateScatterData());
+  const [TIME_DATA] = useState(() => generateTimeSeriesData());
+  const [displayCount, setDisplayCount] = useState(11); // 11 years: 2015–2025
 
   // Time-series animation
   useEffect(() => {
@@ -499,11 +462,7 @@ export default function InteractiveVisualizations() {
         {/* Footer */}
         <div className="border-t border-white/5 pt-8 pb-4 text-center">
           <p className="text-xs text-slate-600">
-            Visualizations powered by{' '}
-            <span className="text-slate-500">AEGFA analytics engine</span> ·
-            Satellite data from{' '}
-            <span className="text-slate-500">Copernicus</span>,{' '}
-            <span className="text-slate-500">NASA MODIS</span> · Updated every 6 hours
+            Data simulated using published oceanographic baselines from NOAA, NASA MODIS, and Copernicus Marine Service
           </p>
         </div>
 

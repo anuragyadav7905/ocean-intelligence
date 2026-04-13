@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -14,47 +14,21 @@ import {
   CartesianGrid, Tooltip, Legend,
   Cell,
 } from 'recharts';
-
-// ─── Sample data ────────────────────────────────────────────────────────────
-
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-const sstData = months.map((m, i) => ({
-  month: m,
-  SST: [22.1, 22.5, 23.2, 24.0, 25.1, 26.3, 27.0, 26.8, 25.5, 24.2, 23.1, 22.4][i],
-}));
-
-const chloroData = [
-  { region: 'N Atlantic', value: 1.2 },
-  { region: 'S Pacific',  value: 0.8 },
-  { region: 'Indian Oc.', value: 0.95 },
-  { region: 'Arctic',     value: 0.45 },
-  { region: 'Mediterranean', value: 1.1 },
-  { region: 'Caribbean',  value: 0.7 },
-];
-
-const multiData = months.map((m, i) => ({
-  month: m,
-  SST:    [22.1, 22.5, 23.2, 24.0, 25.1, 26.3, 27.0, 26.8, 25.5, 24.2, 23.1, 22.4][i],
-  Salinity: [34.8, 34.9, 35.0, 35.1, 35.3, 35.4, 35.2, 35.2, 35.1, 35.0, 34.9, 34.8][i],
-  DO:     [7.2, 7.1, 7.0, 6.9, 6.8, 6.6, 6.5, 6.6, 6.7, 6.8, 7.0, 7.2][i],
-}));
-
-// Sparkline data per stat card (7 points)
-const sparkSST    = [21.8, 22.1, 22.6, 23.4, 23.9, 24.1, 24.3];
-const sparkChloro = [1.1, 1.05, 0.99, 0.95, 0.91, 0.88, 0.87];
-const sparkSal    = [35.0, 35.1, 35.1, 35.2, 35.2, 35.2, 35.2];
-const sparkDO     = [7.3, 7.2, 7.1, 7.0, 6.9, 6.85, 6.8];
+import {
+  generateWeeklyData,
+  generateMonthlyData,
+  generateYearlyData,
+  generateAllTimeData,
+} from '../utils/dataGenerator';
 
 // ─── Theme tokens ────────────────────────────────────────────────────────────
 
-const GRID   = '#1a2332';
-const AXIS   = '#94a3b8';
-const TEAL   = '#4fdbc8';
-const CYAN   = '#4cd7f6';
-const GREEN  = '#4ade80';
-const TT_BG  = '#0d1c32';
+const GRID  = '#1a2332';
+const AXIS  = '#94a3b8';
+const TEAL  = '#4fdbc8';
+const CYAN  = '#4cd7f6';
+const GREEN = '#4ade80';
+const TT_BG = '#0d1c32';
 
 const TOOLTIP_STYLE = {
   backgroundColor: TT_BG,
@@ -62,6 +36,48 @@ const TOOLTIP_STYLE = {
   borderRadius: 12,
   color: '#e2e8f0',
   fontSize: 12,
+};
+
+// ─── Filter config ────────────────────────────────────────────────────────────
+
+const FILTERS = [
+  { label: 'Last 7 Days',    key: '7days'    },
+  { label: 'Last 30 Days',   key: '30days'   },
+  { label: 'Last 12 Months', key: '12months' },
+  { label: 'All Time',       key: 'alltime'  },
+];
+
+const GENERATOR_MAP = {
+  '7days':    generateWeeklyData,
+  '30days':   generateMonthlyData,
+  '12months': generateYearlyData,
+  'alltime':  generateAllTimeData,
+};
+
+const CHANGE_LABEL = {
+  '7days':    'from yesterday',
+  '30days':   'from last month',
+  '12months': 'from last month',
+  'alltime':  'over 5 years',
+};
+
+const CHART_META = {
+  '7days': {
+    sstSub:   '7-day trend (°C) · Daily sensor readings',
+    multiSub: 'Weekly parameter comparison — SST, Salinity, Dissolved O₂',
+  },
+  '30days': {
+    sstSub:   '30-day trend (°C) · Daily readings',
+    multiSub: 'Monthly parameter comparison — SST, Salinity, Dissolved O₂',
+  },
+  '12months': {
+    sstSub:   '12-month trend (°C) — NOAA OSTIA daily composite',
+    multiSub: '12-month comparison — SST (°C), Salinity (PSU), Dissolved O₂ (mg/L)',
+  },
+  'alltime': {
+    sstSub:   '5-year trend (°C) · Annual averages 2021–2025',
+    multiSub: 'Long-term climate comparison 2021–2025',
+  },
 };
 
 // ─── Tiny sparkline ──────────────────────────────────────────────────────────
@@ -75,7 +91,6 @@ function Sparkline({ data, color }) {
     const y = h - ((v - min) / (max - min || 1)) * h;
     return `${x},${y}`;
   }).join(' ');
-
   return (
     <svg width={w} height={h} className="opacity-70">
       <polyline fill="none" stroke={color} strokeWidth="1.5"
@@ -89,16 +104,18 @@ function Sparkline({ data, color }) {
 
 // ─── Stat card ───────────────────────────────────────────────────────────────
 
-function StatCard({ icon: Icon, label, value, unit, change, changeLabel, sparkData, delay }) {
-  const trend = change > 0 ? 'up' : change < 0 ? 'down' : 'flat';
-  const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus;
-  const trendColor = trend === 'up' ? 'text-red-400' : trend === 'down' ? 'text-cyan-400' : 'text-on-surface-variant';
+function StatCard({ icon: Icon, label, value, unit, changeVal, changeLabel, sparkData, delay }) {
+  const dir = changeVal > 0 ? 'up' : changeVal < 0 ? 'down' : 'flat';
+  const TrendIcon = dir === 'up' ? TrendingUp : dir === 'down' ? TrendingDown : Minus;
+  const trendColor = dir === 'up' ? 'text-red-400' : dir === 'down' ? 'text-cyan-400' : 'text-on-surface-variant';
+  const sign = changeVal > 0 ? '+' : '';
 
   return (
     <motion.div
+      key={`${label}-${value}`}
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.5 }}
+      transition={{ delay, duration: 0.45 }}
       className="bg-surface-container rounded-2xl p-6 border border-primary/10 hover:border-primary/30 hover:shadow-[0_8px_32px_-8px_rgba(79,219,200,0.2)] transition-all duration-300"
     >
       <div className="flex items-start justify-between mb-4">
@@ -107,16 +124,14 @@ function StatCard({ icon: Icon, label, value, unit, change, changeLabel, sparkDa
         </div>
         <Sparkline data={sparkData} color={TEAL} />
       </div>
-
       <div className="mb-1">
         <span className="text-3xl font-bold text-on-background font-headline">{value}</span>
         <span className="text-sm text-on-surface-variant ml-1">{unit}</span>
       </div>
       <div className="text-xs text-on-surface-variant uppercase tracking-widest mb-3">{label}</div>
-
       <div className={`flex items-center gap-1 text-xs font-medium ${trendColor}`}>
         <TrendIcon size={13} />
-        <span>{changeLabel}</span>
+        <span>{sign}{changeVal} {changeLabel}</span>
       </div>
     </motion.div>
   );
@@ -139,34 +154,46 @@ function FilterBtn({ label, active, onClick }) {
   );
 }
 
-// ─── Section wrapper ─────────────────────────────────────────────────────────
+// ─── Chart card wrapper ──────────────────────────────────────────────────────
 
-function ChartCard({ title, subtitle, delay, children }) {
+function ChartCard({ title, subtitle, children }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.5 }}
-      className="bg-surface-container rounded-2xl p-6 border border-primary/10"
-    >
+    <div className="bg-surface-container rounded-2xl p-6 border border-primary/10">
       <h3 className="text-base font-bold text-on-surface mb-0.5">{title}</h3>
-      {subtitle && <p className="text-xs text-on-surface-variant mb-5">{subtitle}</p>}
-      {!subtitle && <div className="mb-5" />}
+      <p className="text-xs text-on-surface-variant mb-5">{subtitle}</p>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 // ─── Main component ──────────────────────────────────────────────────────────
 
-const FILTERS = ['Last 7 Days', 'Last 30 Days', 'Last 12 Months', 'All Time'];
-
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState('Last 12 Months');
+  const [activeFilter, setActiveFilter] = useState('12months');
+  const [data, setData] = useState(() => generateYearlyData());
+
+  // Regenerate all data when the time filter changes
+  useEffect(() => {
+    setData(GENERATOR_MAP[activeFilter]());
+  }, [activeFilter]);
+
+  // Derive chart-ready arrays
+  const sstChartData = data.sstTrend.map(d => ({ month: d.name, SST: d.value }));
+  const multiData    = data.oceanTrends.map(d => ({
+    month: d.name, SST: d.sst, Salinity: d.salinity, DO: d.dissolvedOxygen,
+  }));
+  const chloroData   = data.chloroData;
+  const { stats }    = data;
+  const meta         = CHART_META[activeFilter];
+  const changeLabel  = CHANGE_LABEL[activeFilter];
+
+  // X-axis tick interval for 30-day view (avoids label collision)
+  const xInterval = data.sstTrend.length > 12 ? Math.floor(data.sstTrend.length / 6) - 1 : 0;
 
   return (
     <div className="min-h-screen bg-background text-on-background">
+
       {/* Top bar */}
       <div className="sticky top-0 z-40 bg-surface-container-lowest/90 backdrop-blur-xl border-b border-outline-variant/10">
         <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-4 flex items-center gap-4">
@@ -182,7 +209,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Page content */}
       <div className="max-w-screen-xl mx-auto px-6 md:px-10 py-10">
 
         {/* Header */}
@@ -203,11 +229,14 @@ export default function Dashboard() {
             Real-time monitoring of ocean environmental parameters via satellite data and sensor networks.
             Powered by NOAA OSTIA, NASA MODIS, and Argo Float arrays.
           </p>
-
-          {/* Filter row */}
           <div className="flex flex-wrap gap-2 mt-6">
             {FILTERS.map(f => (
-              <FilterBtn key={f} label={f} active={activeFilter === f} onClick={() => setActiveFilter(f)} />
+              <FilterBtn
+                key={f.key}
+                label={f.label}
+                active={activeFilter === f.key}
+                onClick={() => setActiveFilter(f.key)}
+              />
             ))}
           </div>
         </motion.div>
@@ -217,56 +246,51 @@ export default function Dashboard() {
           <StatCard
             icon={Thermometer}
             label="Sea Surface Temperature"
-            value="24.3"
+            value={stats.sst.value}
             unit="°C"
-            change={1}
-            changeLabel="+0.5° from last month"
-            sparkData={sparkSST}
-            delay={0.1}
+            changeVal={stats.sst.changeVal}
+            changeLabel={changeLabel}
+            sparkData={stats.sst.spark}
+            delay={0}
           />
           <StatCard
             icon={Activity}
             label="Chlorophyll-a Concentration"
-            value="0.87"
+            value={stats.chlorophyll.value}
             unit="mg/m³"
-            change={-1}
-            changeLabel="-0.12 from last month"
-            sparkData={sparkChloro}
-            delay={0.15}
+            changeVal={stats.chlorophyll.changeVal}
+            changeLabel={changeLabel}
+            sparkData={stats.chlorophyll.spark}
+            delay={0.05}
           />
           <StatCard
             icon={Droplets}
             label="Salinity"
-            value="35.2"
+            value={stats.salinity.value}
             unit="PSU"
-            change={0}
-            changeLabel="Stable — no change"
-            sparkData={sparkSal}
-            delay={0.2}
+            changeVal={stats.salinity.changeVal}
+            changeLabel={changeLabel}
+            sparkData={stats.salinity.spark}
+            delay={0.1}
           />
           <StatCard
             icon={Wind}
             label="Dissolved Oxygen"
-            value="6.8"
+            value={stats.dissolvedOxygen.value}
             unit="mg/L"
-            change={-1}
-            changeLabel="-0.3 from last month"
-            sparkData={sparkDO}
-            delay={0.25}
+            changeVal={stats.dissolvedOxygen.changeVal}
+            changeLabel={changeLabel}
+            sparkData={stats.dissolvedOxygen.spark}
+            delay={0.15}
           />
         </div>
 
-        {/* ── Row 2: Line + Bar ── */}
+        {/* ── Row 2: SST + Chlorophyll ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
 
-          {/* SST Line chart */}
-          <ChartCard
-            title="Sea Surface Temperature"
-            subtitle="12-month trend (°C) — NOAA OSTIA daily composite"
-            delay={0.3}
-          >
+          <ChartCard title="Sea Surface Temperature" subtitle={meta.sstSub}>
             <ResponsiveContainer width="100%" height={240}>
-              <AreaChart data={sstData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
+              <AreaChart data={sstChartData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
                 <defs>
                   <linearGradient id="sstGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%"  stopColor={TEAL} stopOpacity={0.25} />
@@ -274,28 +298,34 @@ export default function Dashboard() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid stroke={GRID} strokeDasharray="4 4" />
-                <XAxis dataKey="month" tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} domain={[21, 28]} />
+                <XAxis
+                  dataKey="month"
+                  tick={{ fill: AXIS, fontSize: 11 }}
+                  axisLine={false} tickLine={false}
+                  interval={xInterval}
+                />
+                <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} domain={['auto', 'auto']} />
                 <Tooltip contentStyle={TOOLTIP_STYLE} />
-                <Area type="monotone" dataKey="SST" stroke={TEAL} strokeWidth={2}
-                  fill="url(#sstGrad)" dot={false} activeDot={{ r: 4, fill: TEAL }} />
+                <Area
+                  type="monotone" dataKey="SST" stroke={TEAL} strokeWidth={2}
+                  fill="url(#sstGrad)" dot={false} activeDot={{ r: 4, fill: TEAL }}
+                  isAnimationActive animationDuration={800}
+                />
               </AreaChart>
             </ResponsiveContainer>
           </ChartCard>
 
-          {/* Chlorophyll Bar chart */}
-          <ChartCard
-            title="Chlorophyll-a by Region"
-            subtitle="Concentration (mg/m³) — NASA MODIS Aqua"
-            delay={0.35}
-          >
+          <ChartCard title="Chlorophyll-a by Region" subtitle="Concentration (mg/m³) — NASA MODIS Aqua">
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={chloroData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
                 <CartesianGrid stroke={GRID} strokeDasharray="4 4" vertical={false} />
                 <XAxis dataKey="region" tick={{ fill: AXIS, fontSize: 10 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} domain={[0, 1.5]} />
+                <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} domain={[0, 1.6]} />
                 <Tooltip contentStyle={TOOLTIP_STYLE} />
-                <Bar dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={48}>
+                <Bar
+                  dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={48}
+                  isAnimationActive animationDuration={800}
+                >
                   {chloroData.map((entry, i) => (
                     <Cell
                       key={i}
@@ -308,48 +338,37 @@ export default function Dashboard() {
           </ChartCard>
         </div>
 
-        {/* ── Row 3: Multi-parameter area chart ── */}
-        <ChartCard
-          title="Multi-Parameter Ocean Trends"
-          subtitle="12-month comparison — SST (°C), Salinity (PSU), Dissolved Oxygen (mg/L)"
-          delay={0.4}
-        >
+        {/* ── Row 3: Multi-parameter chart ── */}
+        <ChartCard title="Multi-Parameter Ocean Trends" subtitle={meta.multiSub}>
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={multiData} margin={{ top: 4, right: 24, left: -16, bottom: 0 }}>
-              <defs>
-                <linearGradient id="sstAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor={TEAL} stopOpacity={0.15} />
-                  <stop offset="95%" stopColor={TEAL} stopOpacity={0} />
-                </linearGradient>
-              </defs>
               <CartesianGrid stroke={GRID} strokeDasharray="4 4" />
-              <XAxis dataKey="month" tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} />
+              <XAxis
+                dataKey="month"
+                tick={{ fill: AXIS, fontSize: 11 }}
+                axisLine={false} tickLine={false}
+                interval={xInterval}
+              />
               <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} />
               <Tooltip contentStyle={TOOLTIP_STYLE} />
-              <Legend
-                wrapperStyle={{ fontSize: 12, color: AXIS, paddingTop: 16 }}
-                iconType="circle"
-                iconSize={8}
-              />
-              <Line type="monotone" dataKey="SST" stroke={TEAL}  strokeWidth={2} dot={false}
-                activeDot={{ r: 4, fill: TEAL }} name="SST (°C)" />
+              <Legend wrapperStyle={{ fontSize: 12, color: AXIS, paddingTop: 16 }} iconType="circle" iconSize={8} />
+              <Line type="monotone" dataKey="SST"      stroke={TEAL}  strokeWidth={2} dot={false}
+                activeDot={{ r: 4, fill: TEAL  }} name="SST (°C)"
+                isAnimationActive animationDuration={800} />
               <Line type="monotone" dataKey="Salinity" stroke={CYAN}  strokeWidth={2} dot={false}
-                activeDot={{ r: 4, fill: CYAN }} name="Salinity (PSU)" />
-              <Line type="monotone" dataKey="DO" stroke={GREEN} strokeWidth={2} dot={false}
-                activeDot={{ r: 4, fill: GREEN }} name="Dissolved O₂ (mg/L)" />
+                activeDot={{ r: 4, fill: CYAN  }} name="Salinity (PSU)"
+                isAnimationActive animationDuration={800} />
+              <Line type="monotone" dataKey="DO"       stroke={GREEN} strokeWidth={2} dot={false}
+                activeDot={{ r: 4, fill: GREEN }} name="Dissolved O₂ (mg/L)"
+                isAnimationActive animationDuration={800} />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
 
         {/* Footer note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.55, duration: 0.5 }}
-          className="text-center text-xs text-on-surface-variant/50 mt-8"
-        >
-          Data sourced from NOAA OSTIA · NASA MODIS · Argo Float Network · CMEMS · Updated daily via AEGFA ingestion pipeline
-        </motion.p>
+        <p className="text-center text-xs text-on-surface-variant/40 mt-8">
+          Data simulated using published oceanographic baselines from NOAA, NASA MODIS, and Copernicus Marine Service
+        </p>
       </div>
     </div>
   );

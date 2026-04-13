@@ -8,6 +8,7 @@ import {
 import {
   ArrowLeft, Search, Dna, FlaskConical, AlertTriangle, TrendingUp, Fish,
 } from 'lucide-react';
+import { generateSpeciesData, generatePieData, generateHabitatData } from '../utils/dataGenerator';
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const TEAL    = '#4fdbc8';
@@ -15,130 +16,6 @@ const GRID    = '#1a2332';
 const AXIS    = '#94a3b8';
 const TT_BG   = '#0d1c32';
 const TT_BORDER = '#1e3a5f';
-
-// ─── Static data ──────────────────────────────────────────────────────────────
-const SPECIES = [
-  {
-    id: 1,
-    common:     'Blue Whale',
-    scientific: 'Balaenoptera musculus',
-    status:     'Endangered',
-    category:   'Mammals',
-    habitat:    'Pelagic',
-    detection:  92,
-    gradient:   'from-blue-900 via-blue-800 to-cyan-900',
-  },
-  {
-    id: 2,
-    common:     'Great White Shark',
-    scientific: 'Carcharodon carcharias',
-    status:     'Vulnerable',
-    category:   'Fish',
-    habitat:    'Coastal',
-    detection:  78,
-    gradient:   'from-slate-800 via-blue-900 to-slate-900',
-  },
-  {
-    id: 3,
-    common:     'Green Sea Turtle',
-    scientific: 'Chelonia mydas',
-    status:     'Endangered',
-    category:   'Reptiles',
-    habitat:    'Coral Reef',
-    detection:  85,
-    gradient:   'from-emerald-900 via-teal-800 to-cyan-900',
-  },
-  {
-    id: 4,
-    common:     'Giant Pacific Octopus',
-    scientific: 'Enteroctopus dofleini',
-    status:     'Least Concern',
-    category:   'Invertebrates',
-    habitat:    'Benthic',
-    detection:  91,
-    gradient:   'from-violet-900 via-indigo-900 to-blue-900',
-  },
-  {
-    id: 5,
-    common:     'Hawksbill Turtle',
-    scientific: 'Eretmochelys imbricata',
-    status:     'Critically Endangered',
-    category:   'Reptiles',
-    habitat:    'Coral Reef',
-    detection:  67,
-    gradient:   'from-amber-900 via-orange-900 to-red-900',
-  },
-  {
-    id: 6,
-    common:     'Humpback Whale',
-    scientific: 'Megaptera novaeangliae',
-    status:     'Least Concern',
-    category:   'Mammals',
-    habitat:    'Pelagic',
-    detection:  94,
-    gradient:   'from-sky-900 via-blue-800 to-indigo-900',
-  },
-  {
-    id: 7,
-    common:     'Leatherback Sea Turtle',
-    scientific: 'Dermochelys coriacea',
-    status:     'Vulnerable',
-    category:   'Reptiles',
-    habitat:    'Open Ocean',
-    detection:  72,
-    gradient:   'from-slate-900 via-teal-900 to-cyan-900',
-  },
-  {
-    id: 8,
-    common:     'Bottlenose Dolphin',
-    scientific: 'Tursiops truncatus',
-    status:     'Least Concern',
-    category:   'Mammals',
-    habitat:    'Coastal',
-    detection:  96,
-    gradient:   'from-cyan-900 via-sky-800 to-blue-900',
-  },
-  {
-    id: 9,
-    common:     'Hammerhead Shark',
-    scientific: 'Sphyrna mokarran',
-    status:     'Critically Endangered',
-    category:   'Fish',
-    habitat:    'Pelagic',
-    detection:  63,
-    gradient:   'from-gray-900 via-blue-900 to-slate-800',
-  },
-  {
-    id: 10,
-    common:     'Napoleon Wrasse',
-    scientific: 'Cheilinus undulatus',
-    status:     'Endangered',
-    category:   'Fish',
-    habitat:    'Coral Reef',
-    detection:  58,
-    gradient:   'from-teal-900 via-emerald-800 to-green-900',
-  },
-  {
-    id: 11,
-    common:     'Dugong',
-    scientific: 'Dugong dugon',
-    status:     'Vulnerable',
-    category:   'Mammals',
-    habitat:    'Coastal',
-    detection:  71,
-    gradient:   'from-green-900 via-teal-900 to-cyan-900',
-  },
-  {
-    id: 12,
-    common:     'Antarctic Krill',
-    scientific: 'Euphausia superba',
-    status:     'Least Concern',
-    category:   'Invertebrates',
-    habitat:    'Open Ocean',
-    detection:  89,
-    gradient:   'from-pink-900 via-rose-900 to-red-900',
-  },
-];
 
 const STATUS_CONFIG = {
   'Critically Endangered': { bg: 'bg-red-500/20',    text: 'text-red-400',    border: 'border-red-500/40'    },
@@ -148,22 +25,7 @@ const STATUS_CONFIG = {
   'Least Concern':         { bg: 'bg-green-500/20',  text: 'text-green-400',  border: 'border-green-500/40'  },
 };
 
-const PIE_DATA = [
-  { name: 'Least Concern',         value: 45, color: '#22c55e' },
-  { name: 'Vulnerable',            value: 22, color: '#eab308' },
-  { name: 'Endangered',            value: 18, color: '#f97316' },
-  { name: 'Near Threatened',       value: 10, color: '#3b82f6' },
-  { name: 'Critically Endangered', value:  5, color: '#ef4444' },
-];
-
-const HABITAT_DATA = [
-  { habitat: 'Coral Reef',  rate: 82 },
-  { habitat: 'Coastal',     rate: 91 },
-  { habitat: 'Pelagic',     rate: 76 },
-  { habitat: 'Deep Sea',    rate: 45 },
-  { habitat: 'Open Ocean',  rate: 68 },
-  { habitat: 'Benthic',     rate: 88 },
-];
+// PIE_DATA and HABITAT_DATA are generated per-session inside the component
 
 const CATEGORIES   = ['All', 'Fish', 'Mammals', 'Reptiles', 'Invertebrates', 'Coral', 'Plankton'];
 const STATUSES     = ['All', 'Critically Endangered', 'Endangered', 'Vulnerable', 'Near Threatened', 'Least Concern'];
@@ -283,6 +145,11 @@ export default function BiodiversityExplorer() {
   const [category, setCategory] = useState('All');
   const [status,   setStatus]   = useState('All');
   const [habitat,  setHabitat]  = useState('All');
+
+  // Generate all data once on mount — values vary slightly each page load
+  const [SPECIES]      = useState(() => generateSpeciesData());
+  const [PIE_DATA]     = useState(() => generatePieData());
+  const [HABITAT_DATA] = useState(() => generateHabitatData());
 
   const filtered = useMemo(() => {
     return SPECIES.filter(sp => {
@@ -509,12 +376,7 @@ export default function BiodiversityExplorer() {
         {/* ── Footer note ───────────────────────────────────────────────── */}
         <div className="border-t border-white/5 pt-8 pb-4 text-center">
           <p className="text-xs text-slate-600">
-            Data sourced from{' '}
-            <span className="text-slate-500">GBIF</span> ·{' '}
-            <span className="text-slate-500">OBIS</span> ·{' '}
-            <span className="text-slate-500">BOLD Systems</span> ·{' '}
-            eDNA sequencing via{' '}
-            <span className="text-slate-500">AEGFA biodiversity pipeline</span>
+            Data simulated using published oceanographic baselines from NOAA, NASA MODIS, and Copernicus Marine Service
           </p>
         </div>
 
