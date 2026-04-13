@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ocean.Net | University Research System</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#27354c",
+                      "outline-variant": "#3c4947",
+                      "on-error-container": "#ffdad6",
+                      "primary": "#4fdbc8",
+                      "on-surface-variant": "#bbcac6",
+                      "outline": "#859490",
+                      "inverse-primary": "#006b5f",
+                      "tertiary-fixed-dim": "#9fcaff",
+                      "secondary": "#4cd7f6",
+                      "background": "#041329",
+                      "on-surface": "#d6e3ff",
+                      "surface-container": "#112036",
+                      "secondary-container": "#03b5d3",
+                      "on-secondary-fixed": "#001f26",
+                      "inverse-on-surface": "#233148",
+                      "on-background": "#d6e3ff",
+                      "on-primary-container": "#00423b",
+                      "error-container": "#93000a",
+                      "inverse-surface": "#d6e3ff",
+                      "on-tertiary-container": "#003c68",
+                      "on-tertiary": "#003258",
+                      "primary-fixed-dim": "#4fdbc8",
+                      "on-primary": "#003731",
+                      "on-primary-fixed": "#00201c",
+                      "tertiary": "#9fcaff",
+                      "secondary-fixed": "#acedff",
+                      "tertiary-fixed": "#d1e4ff",
+                      "surface-dim": "#041329",
+                      "on-error": "#690005",
+                      "surface-container-low": "#0d1c32",
+                      "secondary-fixed-dim": "#4cd7f6",
+                      "surface": "#041329",
+                      "on-tertiary-fixed-variant": "#00497d",
+                      "on-secondary-container": "#00424e",
+                      "surface-container-highest": "#27354c",
+                      "primary-container": "#14b8a6",
+                      "surface-tint": "#4fdbc8",
+                      "surface-container-high": "#1c2a41",
+                      "primary-fixed": "#71f8e4",
+                      "on-secondary": "#003640",
+                      "on-secondary-fixed-variant": "#004e5c",
+                      "surface-bright": "#2c3951",
+                      "tertiary-container": "#55a8fc",
+                      "on-primary-fixed-variant": "#005048",
+                      "surface-container-lowest": "#010e24",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#001d36"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-transition {
+            background: linear-gradient(to bottom, transparent, var(--surface-container-low));
+        }
+        .glass-card {
+            background: rgba(17, 32, 54, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .grid-pattern {
+            background-image: radial-gradient(rgba(79, 219, 200, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        body {
+            background-color: #041329;
+            color: #d6e3ff;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, .font-headline {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl shadow-2xl shadow-teal-900/10">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold text-teal-400 font-['Space_Grotesk'] tracking-tight">The Abyssal Intelligence</div>
+<div class="hidden md:flex items-center space-gap-8 gap-8">
+<a class="text-teal-400 font-bold border-b-2 border-teal-400 pb-1 font-['Space_Grotesk'] tracking-tight" href="#home">Home</a>
+<a class="text-slate-400 hover:text-teal-300 transition-colors font-['Space_Grotesk'] tracking-tight" href="#about">About</a>
+<a class="text-slate-400 hover:text-teal-300 transition-colors font-['Space_Grotesk'] tracking-tight" href="#features">Features</a>
+<a class="text-slate-400 hover:text-teal-300 transition-colors font-['Space_Grotesk'] tracking-tight" href="#algorithm">Algorithm</a>
+<a class="text-slate-400 hover:text-teal-300 transition-colors font-['Space_Grotesk'] tracking-tight" href="#chatbot">Chatbot</a>
+<a class="text-slate-400 hover:text-teal-300 transition-colors font-['Space_Grotesk'] tracking-tight" href="#team">Team</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-xl font-semibold hover:scale-105 active:scale-95 transition-all">
+                Get Started
+            </button>
+</div>
+</nav>
+<main>
+<!-- 1. Hero Section -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden grid-pattern" id="home">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
+<div class="container mx-auto px-8 relative z-10">
+<div class="max-w-4xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-8">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-bold tracking-widest uppercase text-primary">UNIVERSITY RESEARCH SYSTEM</span>
+</div>
+<h1 class="text-7xl md:text-8xl font-bold text-on-background mb-6 tracking-tighter">
+                        Ocean.Net
+                    </h1>
+<p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl leading-relaxed mb-10">
+                        Harnessing advanced ML/NLP through Adaptive Ecological Graph Fusion (AEGFA) to decode marine ecosystems with unprecedented precision.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-bold text-lg hover:shadow-[0_0_30px_rgba(79,219,200,0.3)] transition-all">
+                            Get Started
+                        </button>
+<button class="bg-surface-variant/30 backdrop-blur-md border border-outline-variant text-on-surface px-8 py-4 rounded-xl font-bold text-lg hover:bg-surface-variant/50 transition-all">
+                            Learn More
+                        </button>
+</div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute right-[-10%] top-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-primary/10 blur-[120px] rounded-full"></div>
+</section>
+<!-- 2. About Section -->
+<section class="py-24 bg-surface-container-low" id="about">
+<div class="container mx-auto px-8">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="relative group">
+<div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="relative rounded-xl overflow-hidden border border-outline-variant/30 aspect-square glass-card flex items-center justify-center p-12">
+<div class="absolute top-6 left-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary shadow-[0_0_20px_rgba(79,219,200,0.4)]">
+<span class="text-2xl font-bold text-on-primary">0.92</span>
+<span class="text-xs font-medium text-on-primary/80 leading-tight">Average<br/>Accuracy</span>
+</div>
+<img alt="Tech Visualization" class="w-full h-full object-contain mix-blend-lighten opacity-80" data-alt="futuristic 3D visualization of marine neural network connected by glowing teal light strands in dark blue space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW9UTpEKEKB4Gi3m5jvyoLzpsziNUuuKwwbYhCOzBmo7FkUDVWBoZMugZjbcSUKpGddleYe-FYSWkHrj2vXDZCQRJmVuPVAbQaNO0XigIWJfMlrljRFMhral5lEYfl3JlWyulcoOsXe6c2H_RUNm9q44asllJXNDCfdXXfwU9xsUl4LI1G-ayJF4dQZEYB0VZVoN7AwlPit0DK-uHsrRoZUgXHSeMM4B_dtANRcfvEA1ofq9OEDYGBTEIMeVPpG2iahczVCsDWpKlV"/>
+</div>
+</div>
+<div>
+<h2 class="text-4xl font-bold mb-6 text-on-background">AEGFA Methodology</h2>
+<p class="text-lg text-on-surface-variant mb-8 leading-relaxed">
+                            Our proprietary Adaptive Ecological Graph Fusion Architecture (AEGFA) bridges the gap between disparate marine data streams. By treating oceanic variables as interconnected nodes in a dynamic graph, we enable real-time prediction and deep semantic understanding of biodiversity shifts.
+                        </p>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 rounded-full bg-surface-container-highest border border-outline-variant text-primary text-sm font-semibold">Ecological Graph Fusion</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-highest border border-outline-variant text-secondary text-sm font-semibold">Integrative Data Streams</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-highest border border-outline-variant text-on-surface text-sm font-semibold">0.92 Accuracy</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Core Capabilities -->
+<section class="py-24" id="features">
+<div class="container mx-auto px-8">
+<div class="mb-16 text-center">
+<h2 class="text-4xl font-bold text-on-background mb-4">Core Capabilities</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">A multi-modal intelligence suite designed for researchers and policymakers.</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-primary/20 hover:shadow-[0_10px_40px_-15px_rgba(79,219,200,0.2)] transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">forum</span>
+</div>
+<h3 class="text-xl font-bold mb-3 text-on-surface">Marine Chatbot</h3>
+<p class="text-on-surface-variant leading-relaxed">Advanced NLP interface trained on decades of peer-reviewed oceanographic journals.</p>
+</div>
+<!-- Card 2 -->
+<div class="group p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-primary/20 hover:shadow-[0_10px_40px_-15px_rgba(79,219,200,0.2)] transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</div>
+<h3 class="text-xl font-bold mb-3 text-on-surface">Oceanographic Dashboard</h3>
+<p class="text-on-surface-variant leading-relaxed">Real-time telemetry monitoring SST, salinity, and chlorophyll-a concentrations.</p>
+</div>
+<!-- Card 3 -->
+<div class="group p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-primary/20 hover:shadow-[0_10px_40px_-15px_rgba(79,219,200,0.2)] transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<h3 class="text-xl font-bold mb-3 text-on-surface">Fisheries Forecasting</h3>
+<p class="text-on-surface-variant leading-relaxed">Predictive modeling for sustainable catch volumes and population migration.</p>
+</div>
+<!-- Card 4 -->
+<div class="group p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-primary/20 hover:shadow-[0_10px_40px_-15px_rgba(79,219,200,0.2)] transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<h3 class="text-xl font-bold mb-3 text-on-surface">Biodiversity Explorer</h3>
+<p class="text-on-surface-variant leading-relaxed">Spatial mapping of protected species and vulnerable coral ecosystems.</p>
+</div>
+<!-- Card 5 -->
+<div class="group p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-primary/20 hover:shadow-[0_10px_40px_-15px_rgba(79,219,200,0.2)] transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">settings_input_component</span>
+</div>
+<h3 class="text-xl font-bold mb-3 text-on-surface">Adaptive Fusion Engine</h3>
+<p class="text-on-surface-variant leading-relaxed">Dynamic weighting of satellite, sensor, and historical data for higher accuracy.</p>
+</div>
+<!-- Card 6 -->
+<div class="group p-8 rounded-xl bg-surface-container-low border border-transparent hover:border-primary/20 hover:shadow-[0_10px_40px_-15px_rgba(79,219,200,0.2)] transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<h3 class="text-xl font-bold mb-3 text-on-surface">Interactive Visualizations</h3>
+<p class="text-on-surface-variant leading-relaxed">3D bathymetric projections and ecological time-series heatmaps.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. AEGFA Pipeline -->
+<section class="py-24 bg-surface-container-lowest relative overflow-hidden" id="algorithm">
+<div class="container mx-auto px-8 relative z-10">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-on-background mb-4">AEGFA Pipeline</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">A linear breakdown of the intelligence synthesis process.</p>
+</div>
+<div class="max-w-4xl mx-auto">
+<div class="space-y-12">
+<!-- Steps 1-4 -->
+<div class="relative flex gap-8 pb-12">
+<div class="absolute left-[23px] top-12 bottom-0 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent"></div>
+<div class="shrink-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold z-10">1</div>
+<div class="pt-2">
+<h4 class="text-xl font-bold text-on-surface mb-2">Multi-Modal Data Acquisition</h4>
+<p class="text-on-surface-variant">Sourcing satellite imagery, sub-sea sensor logs, and oceanic climate indices.</p>
+</div>
+</div>
+<div class="relative flex gap-8 pb-12">
+<div class="absolute left-[23px] top-12 bottom-0 w-px bg-primary/50"></div>
+<div class="shrink-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold z-10">2</div>
+<div class="pt-2">
+<h4 class="text-xl font-bold text-on-surface mb-2">Graph Node Embedding</h4>
+<p class="text-on-surface-variant">Representing marine variables as multi-dimensional vectors in a relational graph.</p>
+</div>
+</div>
+<div class="relative flex gap-8 pb-12">
+<div class="absolute left-[23px] top-12 bottom-0 w-px bg-primary/50"></div>
+<div class="shrink-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold z-10">3</div>
+<div class="pt-2">
+<h4 class="text-xl font-bold text-on-surface mb-2">Ecological Graph Attention</h4>
+<p class="text-on-surface-variant">Applying self-attention mechanisms to weigh environmental influences dynamically.</p>
+</div>
+</div>
+<div class="relative flex gap-8 pb-12">
+<div class="absolute left-[23px] top-12 bottom-0 w-px bg-primary/50"></div>
+<div class="shrink-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold z-10">4</div>
+<div class="pt-2">
+<h4 class="text-xl font-bold text-on-surface mb-2">Adaptive Fusion</h4>
+<p class="text-on-surface-variant">Synthesizing local and global environmental features into a unified knowledge state.</p>
+</div>
+</div>
+<!-- Step 5 Grid -->
+<div class="flex gap-8">
+<div class="shrink-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-[0_0_20px_rgba(79,219,200,0.5)]">5</div>
+<div class="pt-2 w-full">
+<h4 class="text-xl font-bold text-on-surface mb-6">Inference &amp; Optimization</h4>
+<div class="grid sm:grid-cols-3 gap-4">
+<div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant/30 text-center">
+<div class="text-primary font-bold mb-1">Adaptive Fusion</div>
+<div class="text-xs text-on-surface-variant">Feature Weighting</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant/30 text-center">
+<div class="text-primary font-bold mb-1">Ensemble Prediction</div>
+<div class="text-xs text-on-surface-variant">Multi-model Synthesis</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-high border border-outline-variant/30 text-center">
+<div class="text-primary font-bold mb-1">Optimization</div>
+<div class="text-xs text-on-surface-variant">Error Minimization</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Expert Ocean Queries -->
+<section class="py-24" id="chatbot">
+<div class="container mx-auto px-8">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="text-4xl font-bold text-on-background mb-6">Expert Ocean Queries</h2>
+<p class="text-lg text-on-surface-variant mb-8">Access the power of Ocean.Net through our conversational interface. Get immediate insights on complex ecological phenomena without digging through datasets.</p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-on-surface">Context-aware biological reasoning</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-on-surface">Direct citation from research databases</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-on-surface">Multi-variable predictive responses</span>
+</li>
+</ul>
+</div>
+<div class="glass-card rounded-2xl border border-outline-variant/30 overflow-hidden shadow-2xl">
+<div class="bg-surface-container-high p-4 flex items-center justify-between border-b border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
+</div>
+<span class="font-bold text-on-surface">Ocean.Net Assistant</span>
+</div>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-red-400/50"></div>
+<div class="w-2 h-2 rounded-full bg-yellow-400/50"></div>
+<div class="w-2 h-2 rounded-full bg-green-400/50"></div>
+</div>
+</div>
+<div class="p-6 space-y-6 h-[400px] overflow-y-auto">
+<div class="flex flex-col items-end">
+<div class="bg-primary/20 border border-primary/30 p-4 rounded-2xl rounded-tr-none max-w-[80%]">
+<p class="text-sm text-on-background">Tell me about coral reef bleaching in the Great Barrier Reef for 2025.</p>
+</div>
+</div>
+<div class="flex flex-col items-start">
+<div class="bg-surface-container-highest p-4 rounded-2xl rounded-tl-none max-w-[80%] shadow-lg">
+<p class="text-sm text-on-surface leading-relaxed">Based on current AEGFA projections and SST anomalies, we anticipate a 22% increase in thermal stress clusters. The adaptive fusion model suggests specific focus on the central sectors where chlorophyll concentration has dipped below 0.15 mg/m³.</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-outline-variant/30 flex gap-3">
+<div class="flex-1 bg-surface-container-lowest rounded-xl px-4 py-2 text-sm text-on-surface-variant italic">Ask anything about the ocean...</div>
+<button class="bg-primary text-on-primary p-2 rounded-xl">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Benchmarking Accuracy -->
+<section class="py-24 bg-surface-container-low">
+<div class="container mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-on-background mb-4">Benchmarking Accuracy</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Outperforming industry standard marine prediction frameworks.</p>
+</div>
+<div class="max-w-3xl mx-auto space-y-8">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-bold text-on-background">AEGFA (Ocean.Net)</span>
+<span class="text-primary font-bold">0.92</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary/60 to-primary w-[92%] shadow-[0_0_15px_rgba(79,219,200,0.5)]"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-on-surface-variant">CATCH Framework</span>
+<span class="text-on-surface-variant">0.87</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant w-[87%] opacity-60"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-on-surface-variant">UniOcean Model</span>
+<span class="text-on-surface-variant">0.85</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant w-[85%] opacity-60"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-on-surface-variant">HyFish v4.0</span>
+<span class="text-on-surface-variant">0.83</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant w-[83%] opacity-60"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Datasets -->
+<section class="py-24">
+<div class="container mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-on-background mb-4">Core Datasets</h2>
+</div>
+<div class="grid lg:grid-cols-2 gap-12">
+<!-- Table 1 -->
+<div class="rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/20">
+<div class="bg-primary/10 border-b border-primary/20 p-4">
+<h4 class="font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">waves</span>
+                                Oceanographic Indices
+                            </h4>
+</div>
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/20">
+<th class="p-4">Parameter</th>
+<th class="p-4">Unit</th>
+<th class="p-4">Frequency</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-4 text-on-surface">SST Anomaly</td>
+<td class="p-4 text-on-surface-variant">°C</td>
+<td class="p-4 text-on-surface-variant">Daily</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-4 text-on-surface">Chlorophyll-a</td>
+<td class="p-4 text-on-surface-variant">mg/m³</td>
+<td class="p-4 text-on-surface-variant">Weekly</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-4 text-on-surface">Salinity</td>
+<td class="p-4 text-on-surface-variant">PSU</td>
+<td class="p-4 text-on-surface-variant">Monthly</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table 2 -->
+<div class="rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/20">
+<div class="bg-secondary/10 border-b border-secondary/20 p-4">
+<h4 class="font-bold text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined">phishing</span>
+                                Fisheries &amp; Biodiversity
+                            </h4>
+</div>
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/20">
+<th class="p-4">Metric</th>
+<th class="p-4">Scope</th>
+<th class="p-4">Update</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-4 text-on-surface">Catch Volume</td>
+<td class="p-4 text-on-surface-variant">Regional</td>
+<td class="p-4 text-on-surface-variant">Seasonal</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-4 text-on-surface">CPUE</td>
+<td class="p-4 text-on-surface-variant">Vessel-level</td>
+<td class="p-4 text-on-surface-variant">Real-time</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-4 text-on-surface">Species Index</td>
+<td class="p-4 text-on-surface-variant">Global</td>
+<td class="p-4 text-on-surface-variant">Annual</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. Team Section -->
+<section class="py-24 bg-surface-container-low" id="team">
+<div class="container mx-auto px-8">
+<div class="text-center mb-20">
+<h2 class="text-4xl font-bold text-on-background mb-4">The Research Team</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Multidisciplinary experts in Marine Biology, Neural Networks, and Data Science.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8">
+<div class="text-center">
+<div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-primary/20 p-1 mb-4 group hover:border-primary transition-all">
+<img alt="Anjum Rouf" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all" data-alt="professional portrait of a south asian man, software researcher, dark background, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkLVHJfgB9xQGKjlOAP9-hANB02aRbJcSsb9DOziv16-0VUouqCpyM1wX-do0M0dc7t70B_dTvaz7ePhQNdYH9n9QaFwfju5-VKVwqOIDZnJcf0Q0GbuDGUVRzlHdYtBmQuu-iaR6Vktm9IDvwzql7amE-JCstAjSQCVBYIQfhF5PNDg9JTAN4_BH1OWPKK66pI6LllT3VB_QBO4qM48ZxnussyzW8910Syv2RDUar4cZ4x0wAOzL8WLaZPC3sWGoPZr_AkqywqSSh"/>
+</div>
+<h4 class="font-bold text-sm text-on-surface">Anjum Rouf</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Lead Architect</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-primary/20 p-1 mb-4 group hover:border-primary transition-all">
+<img alt="Mohd. Faisal" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all" data-alt="professional portrait of a south asian man, data scientist, dark background, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiNWIm2MPIHAtEYRuNai_WiQshhpGwPKrTFXaSG26T4k3lYQnvbKJcg9IA0tewR6wQtWUsNXYRGeHcoKxxPufP2lxYZbSMr_bzqT5-iIlkTVDJGnBdjJLlat8rx55dt3lJOv12MXzeNmBJFCGebn4RMy5Iw4vdE-VgOTqovtCKR5eBPLZkog5i_wIYYZ-gnATZ3EqoKl5z-APgb_yGNVSyYXpvCU26PVAXW8vS1SpVuVw3mlkeq5jr5_y45K1vr_Xcu1cqY4CQNEDn"/>
+</div>
+<h4 class="font-bold text-sm text-on-surface">Mohd. Faisal</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">ML Engineer</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-primary/20 p-1 mb-4 group hover:border-primary transition-all">
+<img alt="Anuja Sharma" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all" data-alt="professional portrait of a south asian woman, marine researcher, dark background, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1yeVB9mW3Rl5-HZBjuVb2S0m1MZu4AeZometZ5CeUlgYrQnnYsKe-zN0cvpDREuY-KNKVXwilzy6kuvdImGugGMCDfa937bvFss5RyUiW5SswRK3be-YIzsCbW2b6w8QHjdJ4zd7Sukwp_QD__YApolqsSAdAJDXHLhE1yP2Eo5pnun0Scq9kGXPsDKdlxilN2vV8uffr72Di9wz0WLyu1mzmSozwmFy35G1lDXndS3rzy21z1Oltr04J4lAlCounUUHakOVKDIzW"/>
+</div>
+<h4 class="font-bold text-sm text-on-surface">Anuja Sharma</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Biologist</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-primary/20 p-1 mb-4 group hover:border-primary transition-all">
+<img alt="Muli Sahithi" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all" data-alt="professional portrait of a south asian woman, neural network specialist, dark background, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Iy9zPBcfDvYW32tfBmbwvLuBWjvRrppVWrdNBHcOFhCKN79kUpe7lNTCBR5pVnKspn9UpehBxEvPjCL5gBVUuCPZOEbFzrzwdEw3gpsL4zE3Bq4A8v1kx-y2VcbtMSJsr65-wNb_fy97Lji3ZnsAVr28eBLQGQVruHovn7lvvwJ8GlgXq5vuIb1_Ge4ia23wGI9hEIHrJmxzTaYSzK4AhrYfVLtCnM5cFMoZYnIS4svAa_pip1zqdTD_rOLr-WC5rQkAb_cMvUC_"/>
+</div>
+<h4 class="font-bold text-sm text-on-surface">Muli Sahithi</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Graph Theorist</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-primary/20 p-1 mb-4 group hover:border-primary transition-all">
+<img alt="Anurag Singh" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all" data-alt="professional portrait of a south asian man, data analyst, dark background, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGXwyhVjS5AAsUinrK-GiuoVMj7MRpV9Ggvdk_uTSO1dL_QHNHvf0gky9F_K9OOC0JhuR4zaL9gi-5pUkNugDt5xUKjULdAJ8-SXFkOpn_RwHSi-tKUjsYnOkj_-YRcpAQtxhdqEXeAPFjSPPcufMsgfg6CHe8WZ6OKrVKvakOUhaOQapbPezVPJyJjpoTt7XacYlVFMTX4u30vZ7ZoC27fBt0Th9QcY0XZiVM_y7cV3YN0ydsnKLfpcHEFLCAVBowSHwJ-pTq2wu2"/>
+</div>
+<h4 class="font-bold text-sm text-on-surface">Anurag Singh</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Cloud Systems</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-primary/20 p-1 mb-4 group hover:border-primary transition-all">
+<img alt="Rahul Mishra" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all" data-alt="professional portrait of a south asian man, UI researcher, dark background, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6q0xg3858Cx_cPjUXCkFaD5UrHYFpxuea4Oqgyj-R0_VFjbpfgN8zrjodI3CTBanBd8NyIWVHIJEyKbVSVbe7XWpFumVkB-c_fn-SncQF-YmZgCYxfeeCsILI6JrM_uFwOaZegn-CHYYfh03FqLdxA_bW6Xrcw6_BnMPNDrpEi7zb_N2ewwugr7PfSFim_7QzwAk6nGx9y8c1D0ozckuWybNO0QFM5Y1dcRkMd7KHEvWpIKONZkZN_S6BE-NQN2kqzcf2aheqwFM6"/>
+</div>
+<h4 class="font-bold text-sm text-on-surface">Rahul Mishra</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Frontend Dev</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-primary/20 p-1 mb-4 group hover:border-primary transition-all">
+<img alt="Sneha Pandey" class="w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all" data-alt="professional portrait of a south asian woman, project lead, dark background, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ9x_yPNKV0ecHcF9zi9pWGCGflva0HSm63xKXxh0_Lk-7_bTP5i9Tsw95zOuWU864K41emR-H1STGcZaWC7iSAePIwEDYsrHQOXTV0LuZ6RSAhQ4isGsWTt__u10T3PIRqYbyW1mx-aWZtlM_J1tH2jWIuBCYk7dbQUOo--wBBVzfaEi0oU2Fm8DPiIHr6CXPi0mkRF0lFMhDUudZkx0RevueUSOokz3J0uMwL2LH4yFIea3S-BtV3UcbC8JHSV6JMOZpZlh4lgFq"/>
+</div>
+<h4 class="font-bold text-sm text-on-surface">Sneha Pandey</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Lead Researcher</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 px-8 border-t border-outline-variant/10">
+<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-lg font-black text-teal-400 font-['Inter'] tracking-wide">The Abyssal Intelligence</div>
+<div class="flex flex-wrap justify-center gap-8 text-sm font-['Inter'] tracking-wide">
+<a class="text-slate-500 hover:text-teal-300 underline-offset-4 transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-teal-300 underline-offset-4 transition-opacity duration-200" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-teal-300 underline-offset-4 transition-opacity duration-200" href="#">Research</a>
+<a class="text-slate-500 hover:text-teal-300 underline-offset-4 transition-opacity duration-200" href="#">API Documentation</a>
+</div>
+<div class="text-slate-500 text-sm font-['Inter'] tracking-wide">
+                © 2024 The Abyssal Intelligence. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

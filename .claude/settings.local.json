@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd.exe /c \"where python\")",
+      "Bash(cmd.exe /c \"python --version\")"
+    ]
+  }
+}

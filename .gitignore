@@ -1,0 +1,63 @@
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# ── Build output ───────────────────────────────────────────────────────────────
+frontend/dist/
+frontend/build/
+dist/
+build/
+
+# ── Environment & secrets ─────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+*.secret
+
+# ── Python virtual environments ───────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+npm2.txt
+npm3.txt
+npm_install.log
+npm_list.txt
+npm_out.txt
+pkgs.log
+vite_out.txt
+
+# ── OS files ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor / IDE ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Vite / tooling cache ──────────────────────────────────────────────────────
+.vite/
+frontend/.vite/
+*.tsbuildinfo
+
+# ── Python cache ──────────────────────────────────────────────────────────────
+backend/__pycache__/
+*.pyc

@@ -1,0 +1,360 @@
+{
+  "marine_animals": [
+    {
+      "question": "What are dolphins?",
+      "answer": "Dolphins are highly intelligent marine mammals belonging to the order Cetacea. They are known for their complex social behaviors, echolocation abilities, and remarkable cognitive skills. Bottlenose dolphins (Tursiops truncatus) are the most studied species and can live up to 40 years. They hunt cooperatively and communicate through a sophisticated system of clicks, whistles, and body language.",
+      "keywords": ["dolphin", "dolphins", "marine mammal", "cetacean", "echolocation"],
+      "category": "marine_animals"
+    },
+    {
+      "question": "Tell me about whales",
+      "answer": "Whales are the largest animals on Earth, belonging to the order Cetacea. Blue whales (Balaenoptera musculus) can grow up to 30 meters and weigh 200 tonnes. They communicate through complex songs spanning thousands of kilometers. Humpback whales are famous for their elaborate singing patterns. Many whale species migrate thousands of kilometers annually between feeding and breeding grounds. Ocean.Net's AEGFA model tracks whale migration corridors with 0.89 accuracy using SST and prey density overlays.",
+      "keywords": ["whale", "whales", "blue whale", "humpback", "cetacean", "baleen"],
+      "category": "marine_animals"
+    },
+    {
+      "question": "What do we know about sharks?",
+      "answer": "Sharks are apex predators that have existed for over 400 million years. There are over 500 species, ranging from the whale shark (the largest fish at 12m) to the dwarf lanternshark (20cm). Great white sharks can detect blood at 1 part per million in seawater. Many shark species are critically endangered due to finning and bycatch. Sharks play a crucial role in maintaining ocean ecosystem balance by regulating prey populations.",
+      "keywords": ["shark", "sharks", "great white", "whale shark", "apex predator", "finning"],
+      "category": "marine_animals"
+    },
+    {
+      "question": "What is special about sea turtles?",
+      "answer": "Sea turtles are ancient reptiles that have navigated Earth's oceans for 110 million years. Seven species exist, all of which are threatened or endangered. They use Earth's magnetic field for navigation and return to their natal beaches to nest. Leatherback turtles dive to 1,200 meters and can weigh 900kg. Sea turtles play vital roles in maintaining seagrass beds and transporting nutrients between feeding and nesting areas.",
+      "keywords": ["sea turtle", "turtle", "leatherback", "loggerhead", "navigation", "nesting"],
+      "category": "marine_animals"
+    },
+    {
+      "question": "What is special about octopuses?",
+      "answer": "Octopuses are remarkably intelligent cephalopod mollusks with three hearts, blue blood, and eight arms lined with suckers. They can camouflage instantly using chromatophores in their skin. Giant Pacific octopuses can weigh 70kg. They are the only invertebrates known to use tools. Octopuses live 1-3 years typically, reproducing once then dying. Their decentralized nervous system — two-thirds of neurons are in their arms — makes them unique among all animals.",
+      "keywords": ["octopus", "octopuses", "cephalopod", "camouflage", "chromatophores", "intelligence"],
+      "category": "marine_animals"
+    },
+    {
+      "question": "Are jellyfish dangerous?",
+      "answer": "Jellyfish are gelatinous zooplankton belonging to the phylum Cnidaria. Most species sting using nematocysts — microscopic harpoons loaded with venom. Box jellyfish (Chironex fleckeri) is among the most venomous animals on Earth. The Portuguese man o' war, though not a true jellyfish, delivers extremely painful stings. However, most jellyfish are harmless to humans. Jellyfish blooms are increasing globally due to warming oceans and overfishing of their predators.",
+      "keywords": ["jellyfish", "jelly", "cnidaria", "sting", "nematocysts", "bloom"],
+      "category": "marine_animals"
+    },
+    {
+      "question": "What are sea horses?",
+      "answer": "Seahorses are unique fish of the genus Hippocampus with bony armored plates instead of scales. They are the only animal species where the male carries and gives birth to young — a male can birth up to 2,500 babies. Seahorses are ambush predators, anchoring to seagrass with their prehensile tails and striking prey with speeds of 1/1000th of a second. There are 46 known species, all threatened by habitat loss, bycatch, and the traditional medicine trade.",
+      "keywords": ["seahorse", "seahorses", "hippocampus", "prehensile tail", "male pregnancy"],
+      "category": "marine_animals"
+    },
+    {
+      "question": "What are manta rays?",
+      "answer": "Manta rays are the world's largest rays, with wingspans reaching 7 meters and weights up to 1.4 tonnes. They are filter feeders, consuming tiny zooplankton and krill. Manta rays have the largest brain-to-body ratio of all fish and demonstrate self-awareness in mirror tests. They are found in tropical and subtropical oceans and are known for spectacular leaping behavior. Both species of manta ray are classified as Vulnerable on the IUCN Red List due to targeted fishing for gill plates used in Chinese medicine.",
+      "keywords": ["manta ray", "ray", "filter feeder", "cartilaginous fish", "gill plate", "elasmobranch"],
+      "category": "marine_animals"
+    }
+  ],
+  "coral_reefs": [
+    {
+      "question": "What is coral bleaching?",
+      "answer": "Coral bleaching occurs when water temperature rises just 1-2°C above the normal maximum, causing corals to expel their symbiotic algae (zooxanthellae) which provide 90% of their energy. Without algae, corals turn white (bleach) and are vulnerable to disease and death. Based on current AEGFA projections and SST anomalies, we anticipate a 22% increase in thermal stress clusters globally by 2026. The central sectors of the Great Barrier Reef show chlorophyll concentrations dipping below 0.15 mg/m³, a critical bleaching indicator.",
+      "keywords": ["coral bleaching", "bleaching", "coral", "zooxanthellae", "thermal stress", "temperature"],
+      "category": "coral_reefs"
+    },
+    {
+      "question": "How can coral reefs be restored?",
+      "answer": "Coral reef restoration includes: coral gardening (growing fragments on underwater nursery trees), assisted gene flow (breeding heat-tolerant corals), biorock technology (using electrical current to accelerate growth), and 3D-printed reef structures for habitat. Organizations like SECORE International achieve 40-70% survival rates with fragmenting and transplanting corals. The AEGFA model identifies optimal restoration sites using SST stability indices and current flow data.",
+      "keywords": ["coral restoration", "restore", "reef restoration", "nursery", "coral gardening"],
+      "category": "coral_reefs"
+    },
+    {
+      "question": "What types of coral reefs exist?",
+      "answer": "There are three main types: fringing reefs (directly bordering shorelines, most common), barrier reefs (separated from coast by a lagoon — the Great Barrier Reef), and atolls (ring-shaped reefs surrounding a lagoon, formed from sunken volcanic islands). Patch reefs are smaller, isolated formations. Cold-water coral reefs also exist at 200-1000m depth in near-freezing temperatures. The Great Barrier Reef at 344,400 km² is the largest biotic structure on Earth.",
+      "keywords": ["coral reef types", "fringing reef", "barrier reef", "atoll", "patch reef", "cold water coral"],
+      "category": "coral_reefs"
+    },
+    {
+      "question": "Why are coral reefs important?",
+      "answer": "Coral reefs cover only 0.1% of the ocean floor but support 25% of all marine species. They provide $375 billion annually in economic value through tourism, fisheries, and coastal protection. Reefs protect over 200 million people from storm surges and wave erosion. They are a major source of medicines — compounds from corals have led to treatments for cancer, HIV, and pain. At current rates of bleaching and acidification, 70-90% of coral reefs could be lost by 2050.",
+      "keywords": ["coral importance", "reef importance", "biodiversity", "economic value", "coastal protection"],
+      "category": "coral_reefs"
+    },
+    {
+      "question": "How does ocean acidification affect corals?",
+      "answer": "Ocean acidification reduces the availability of carbonate ions that corals use to build their calcium carbonate skeletons. As pH drops, existing reef structures begin to dissolve. At projected 2100 pH levels of 7.8, coral calcification rates could decrease by 40-60%. Crustose coralline algae — the cement holding reefs together — are even more sensitive to acidification than corals themselves. AEGFA tracks carbonate saturation state across reef monitoring sites to forecast structural integrity decline.",
+      "keywords": ["acidification", "coral skeleton", "calcification", "carbonate", "pH", "reef dissolution"],
+      "category": "coral_reefs"
+    },
+    {
+      "question": "What threats do coral reefs face?",
+      "answer": "Coral reefs face multiple compounding threats: climate-driven bleaching and acidification, physical damage from crown-of-thorns starfish outbreaks, destructive fishing practices (cyanide and dynamite fishing), coastal runoff and sedimentation blocking sunlight, tourism impacts, and disease outbreaks. Disease now affects over 150 coral species. When multiple stressors combine, reef recovery time increases dramatically. AEGFA's multi-modal fusion model scores reef vulnerability as a composite of thermal stress, water quality, fishing pressure, and disease risk.",
+      "keywords": ["coral threats", "crown of thorns", "destructive fishing", "reef disease", "sedimentation", "stressors"],
+      "category": "coral_reefs"
+    },
+    {
+      "question": "What is symbiosis in coral reefs?",
+      "answer": "Corals live in obligate mutualistic symbiosis with microscopic algae called zooxanthellae (Symbiodiniaceae), which live within coral tissues. The algae photosynthesize and provide up to 90% of the coral's energy needs, while the coral provides CO₂ and nutrients to the algae. This symbiosis is the foundation of reef-building. Corals also have mutualistic relationships with cleaner fish and shrimp that remove parasites. Approximately 800 species of fish, 4,000 species of mollusk, and 500 species of seaweed are found in coral reef ecosystems.",
+      "keywords": ["coral symbiosis", "zooxanthellae", "mutualism", "symbiodiniaceae", "coral biology"],
+      "category": "coral_reefs"
+    }
+  ],
+  "ocean_pollution": [
+    {
+      "question": "What is the problem with plastic in the ocean?",
+      "answer": "Over 8 million tonnes of plastic enter the ocean annually. The Great Pacific Garbage Patch spans 1.6 million km² — twice the size of Texas. Plastic breaks into microplastics (< 5mm) that enter the food chain. Over 700 marine species are affected by plastic pollution, with 100,000 marine mammals and 1 million seabirds dying from it each year. Microplastics have been found in deep-sea sediments, Arctic ice, and human blood. The AEGFA model uses satellite imagery to map surface plastic density hotspots with 87% accuracy.",
+      "keywords": ["plastic", "ocean plastic", "garbage patch", "microplastics", "pollution"],
+      "category": "ocean_pollution"
+    },
+    {
+      "question": "How do oil spills affect marine life?",
+      "answer": "Oil spills coat marine birds and mammals, destroying insulation and buoyancy. Oil in water blocks sunlight needed for photosynthesis by phytoplankton. Polycyclic aromatic hydrocarbons (PAHs) in crude oil are carcinogenic and persist in sediments for decades. The Deepwater Horizon spill (2010) released 4.9 million barrels, affecting 1,300 miles of coastline. Dispersants like Corexit used for cleanup can be more toxic than oil itself. Bioremediation using oil-eating bacteria (Alcanivorax) shows promise for cleanup.",
+      "keywords": ["oil spill", "oil pollution", "crude oil", "PAH", "Deepwater Horizon", "bioremediation"],
+      "category": "ocean_pollution"
+    },
+    {
+      "question": "What are dead zones in the ocean?",
+      "answer": "Ocean dead zones are hypoxic areas with dissolved oxygen below 2 mg/L, insufficient to support most marine life. They form when nutrient runoff (nitrogen and phosphorus from fertilizers) causes algal blooms that, upon decomposition, consume all available oxygen. There are over 700 documented dead zones globally. The Gulf of Mexico dead zone peaks at 22,000 km² annually. Dead zones cause massive fish kills and force mobile species to flee, disrupting entire food webs. Ocean.Net monitors dissolved oxygen concentration across 14 monitored zones.",
+      "keywords": ["dead zone", "hypoxia", "hypoxic", "oxygen depletion", "algal bloom", "eutrophication"],
+      "category": "ocean_pollution"
+    },
+    {
+      "question": "What is noise pollution in the ocean?",
+      "answer": "Anthropogenic underwater noise pollution from shipping, sonar, and seismic surveys has increased dramatically. Low-frequency shipping noise has doubled every decade since the 1960s. Noise disrupts whale communication, navigation, and feeding — blue whales have reduced their feeding calls by up to 4 dB in noisy shipping lanes. Naval sonar has been linked to mass strandings of beaked whales. Chronic noise causes physiological stress in fish and invertebrates. The International Maritime Organization now mandates noise reduction standards for new vessels.",
+      "keywords": ["noise pollution", "underwater noise", "sonar", "shipping noise", "whale communication"],
+      "category": "ocean_pollution"
+    },
+    {
+      "question": "What are microplastics?",
+      "answer": "Microplastics are plastic particles smaller than 5mm. Primary microplastics are manufactured at small sizes (microbeads in cosmetics, plastic pellets). Secondary microplastics result from fragmentation of larger plastics by UV radiation and mechanical action. They are ingested by zooplankton, fish, and filter feeders, bioaccumulating up the food chain. A 2024 study found microplastics in 100% of human blood samples tested. Nanoplastics (< 1 micron) can cross cell membranes and the blood-brain barrier. AEGFA quantifies microplastic concentration from satellite spectral data.",
+      "keywords": ["microplastics", "nanoplastics", "microbeads", "plastic fragments", "bioaccumulation"],
+      "category": "ocean_pollution"
+    },
+    {
+      "question": "What is chemical pollution in the ocean?",
+      "answer": "Chemical pollutants include heavy metals (mercury, lead, cadmium), persistent organic pollutants (PCBs, DDT, PFAS), pharmaceuticals, and agricultural chemicals. Mercury from coal combustion bioaccumulates in tuna, swordfish, and shark up to 1 million times background concentrations. PCBs, banned since the 1970s, persist in killer whale blubber at toxic levels. PFAS 'forever chemicals' have been detected in deep-sea organisms at the Mariana Trench. Endocrine disruptors cause reproductive failure and sex reversal in fish near outflow pipes.",
+      "keywords": ["chemical pollution", "heavy metals", "mercury", "PCBs", "PFAS", "endocrine disruptors"],
+      "category": "ocean_pollution"
+    },
+    {
+      "question": "How does agricultural runoff harm oceans?",
+      "answer": "Agricultural runoff delivers excess nitrogen and phosphorus fertilizers into rivers and ultimately the ocean. This nutrient loading triggers explosive algal blooms (eutrophication). When algae die and decompose, bacterial decomposition consumes dissolved oxygen, creating hypoxic dead zones. Harmful algal blooms (HABs) produce toxins like saxitoxin and domoic acid that kill marine mammals and contaminate shellfish. Globally, agriculture contributes 50-80% of nitrogen and phosphorus loads to coastal waters. AEGFA integrates agricultural runoff indices with chlorophyll-a satellite data to predict HAB risk.",
+      "keywords": ["agricultural runoff", "nutrient pollution", "eutrophication", "harmful algal bloom", "HAB", "nitrogen"],
+      "category": "ocean_pollution"
+    }
+  ],
+  "ecosystems": [
+    {
+      "question": "What lives in the deep sea?",
+      "answer": "The deep sea (below 1000m) covers 65% of Earth's surface and is the largest biome on Earth. Life is adapted to crushing pressure (600 atm at 6000m), near-freezing temperatures, and total darkness. Bioluminescence is used by 90% of deep-sea animals for communication and predation. Hydrothermal vents host chemosynthetic ecosystems powered by hydrogen sulfide — independent of sunlight. Giant tube worms (3m), anglerfish, dumbo octopuses, and viperfish are iconic deep-sea species. AEGFA bathymetric models map deep-sea biodiversity corridors in real time.",
+      "keywords": ["deep sea", "deep ocean", "bioluminescence", "hydrothermal vent", "chemosynthesis", "abyssal"],
+      "category": "ecosystems"
+    },
+    {
+      "question": "Why are mangroves important?",
+      "answer": "Mangroves are salt-tolerant trees forming coastal forests in tropical regions. They sequester carbon at rates 3-5x higher than terrestrial forests. Mangroves protect coastlines from tsunamis and storm surges — intact mangroves reduced casualties by 50% during the 2004 Indian Ocean tsunami. They serve as nurseries for 70% of tropical fish species and support shrimp, crab, and oyster fisheries worth $1.6 billion annually. Globally, 35% of mangroves have been lost since 1980 mainly due to aquaculture development.",
+      "keywords": ["mangrove", "mangroves", "coastal forest", "carbon sequestration", "nursery", "tsunami"],
+      "category": "ecosystems"
+    },
+    {
+      "question": "What are hydrothermal vents?",
+      "answer": "Hydrothermal vents are seafloor cracks where geothermally heated water (up to 464°C) shoots out, rich in minerals and hydrogen sulfide. First discovered in 1977 at the Galapagos Rift, they host ecosystems based on chemosynthesis rather than photosynthesis. Tubeworms up to 2m long, ghostly white shrimp, and giant clams thrive here. These extremophilic communities suggest life could exist on icy moons like Europa. The minerals deposited form valuable polymetallic sulfide deposits attracting deep-sea mining interest.",
+      "keywords": ["hydrothermal vent", "vent", "chemosynthesis", "extremophile", "tubeworm", "black smoker"],
+      "category": "ecosystems"
+    },
+    {
+      "question": "What are seagrass meadows?",
+      "answer": "Seagrass meadows are underwater flowering plant communities found in shallow coastal waters worldwide. They cover about 300,000 km² and are among Earth's most productive ecosystems. Seagrasses sequester carbon 35x faster per unit area than tropical forests and store it for millennia in sediments. They provide critical habitat for juvenile fish, sea horses, and dugongs, and are the primary food for green sea turtles. Seagrass meadows are declining at 7% per year — faster than rainforests — due to coastal development, runoff, and climate change.",
+      "keywords": ["seagrass", "seagrass meadow", "posidonia", "blue carbon", "dugong", "coastal habitat"],
+      "category": "ecosystems"
+    },
+    {
+      "question": "What is the role of phytoplankton?",
+      "answer": "Phytoplankton are microscopic photosynthetic organisms that form the base of marine food webs and produce 50-80% of Earth's atmospheric oxygen. Despite covering only the ocean surface, they fix as much carbon as all land plants combined. Phytoplankton are sensitive indicators of ocean health — their distribution shifts as SST changes. Diatoms, dinoflagellates, and cyanobacteria are major groups. NASA's MODIS satellite tracks chlorophyll-a concentrations globally as a phytoplankton proxy. AEGFA integrates these data to forecast ecosystem productivity and fish abundance.",
+      "keywords": ["phytoplankton", "chlorophyll", "photosynthesis", "primary productivity", "diatom", "marine food web"],
+      "category": "ecosystems"
+    },
+    {
+      "question": "What is the intertidal zone?",
+      "answer": "The intertidal zone is the coastal area exposed at low tide and submerged at high tide. Organisms here must withstand extreme conditions: desiccation, temperature extremes, wave impact, and salinity changes. Life is organized in horizontal bands — barnacles dominate the high tide zone, mussels the mid zone, and sea stars and anemones the low zone. Rock pools are microcosms of ocean life. Intertidal communities are sentinel ecosystems — climate change is causing poleward range shifts detectable in just a few years.",
+      "keywords": ["intertidal", "tide pool", "rocky shore", "barnacle", "mussel", "tidal zone"],
+      "category": "ecosystems"
+    },
+    {
+      "question": "What are kelp forests?",
+      "answer": "Kelp forests are underwater ecosystems formed by dense stands of large brown algae (kelp) in cold, nutrient-rich coastal waters. Giant kelp (Macrocystis pyrifera) grows up to 45cm per day and reaches 45 meters tall. They support extraordinary biodiversity — sea otters, rockfish, harbor seals, and hundreds of invertebrate species. Sea otters are a keystone species: they eat sea urchins that would otherwise overgraze kelp. Kelp forests have declined 40% globally since the 1950s due to warming, urchin barrens, and pollution. AEGFA models kelp canopy extent from Sentinel-2 satellite imagery.",
+      "keywords": ["kelp", "kelp forest", "giant kelp", "sea otter", "urchin barren", "macrocystis"],
+      "category": "ecosystems"
+    }
+  ],
+  "fisheries": [
+    {
+      "question": "What is overfishing?",
+      "answer": "Overfishing occurs when fish are caught faster than populations can reproduce. The FAO estimates 35.4% of global fish stocks are overfished. Overfishing causes cascading ecosystem collapse — removing apex predators allows prey populations to explode, crashing phytoplankton and destabilizing the entire food web. Atlantic cod collapsed in 1992 after overfishing, with stocks still at 1% of historical levels 30 years later. AEGFA's fisheries forecasting module predicts sustainable yield thresholds using fish population modeling and oceanographic data.",
+      "keywords": ["overfishing", "fish stocks", "fishing", "sustainable fisheries", "collapse"],
+      "category": "fisheries"
+    },
+    {
+      "question": "What is bycatch?",
+      "answer": "Bycatch is the unintentional capture of non-target species in fishing gear. Globally, an estimated 40% of all fish caught are bycatch — about 38.5 million tons annually. Major bycatch victims include sea turtles, dolphins, whales, and seabirds. Shrimp trawling has the highest bycatch ratios (up to 20 pounds of bycatch per pound of shrimp). Mitigation includes turtle excluder devices (TEDs), circle hooks, and LED lighting on nets. VMS (vessel monitoring system) data processed by AEGFA helps identify high bycatch fishing zones.",
+      "keywords": ["bycatch", "incidental catch", "fishing gear", "trawling", "turtle excluder devices"],
+      "category": "fisheries"
+    },
+    {
+      "question": "What is aquaculture?",
+      "answer": "Aquaculture is the controlled cultivation of aquatic organisms. It produces 44% of global seafood supply and is the fastest-growing food production sector. Salmon, tilapia, catfish, shrimp, oysters, and seaweed are leading farmed species. Integrated multi-trophic aquaculture (IMTA) co-cultures multiple species — fish waste fertilizes shellfish and seaweed — creating near-zero waste systems. Challenges include disease outbreaks, antibiotic use, and coastal habitat conversion. AEGFA's adaptive fusion model evaluates optimal aquaculture site selection using current, salinity, and temperature data.",
+      "keywords": ["aquaculture", "fish farming", "mariculture", "salmon farming", "IMTA", "seaweed"],
+      "category": "fisheries"
+    },
+    {
+      "question": "What are Marine Protected Areas?",
+      "answer": "Marine Protected Areas (MPAs) are designated zones where human activities are restricted to conserve marine ecosystems. There are over 18,000 MPAs covering 8% of the ocean. Fully protected 'no-take' zones show fish biomass 670% higher than unprotected areas. The 30x30 initiative aims to protect 30% of the ocean by 2030. MPAs benefit adjacent fisheries through spillover of adult fish and larvae. AEGFA analyzes VMS vessel tracking data to detect illegal fishing within MPA boundaries and assess compliance rates.",
+      "keywords": ["marine protected area", "MPA", "no-take zone", "conservation", "30x30", "marine reserve"],
+      "category": "fisheries"
+    },
+    {
+      "question": "How does climate change affect fisheries?",
+      "answer": "Climate change is redistributing fish stocks poleward and into deeper water as species track their preferred temperature ranges. North Sea cod have shifted 500km northward since the 1970s. Tropical fisheries face species range contractions with projected catch declines of 40% in some regions by 2050. Ocean acidification reduces survival rates of shellfish larvae. Changing monsoon patterns affect upwelling systems that underpin major fisheries like the Peruvian anchoveta. AEGFA's SST and ocean productivity projections inform long-range fisheries management decisions.",
+      "keywords": ["climate fisheries", "fish migration", "range shift", "fisheries decline", "catch decline", "upwelling"],
+      "category": "fisheries"
+    },
+    {
+      "question": "What is Illegal Unreported and Unregulated fishing?",
+      "answer": "IUU (Illegal, Unreported and Unregulated) fishing accounts for 20-50% of global catches, worth $10-23 billion annually. It undermines fisheries management, depletes stocks, and threatens food security. Methods include using flags of convenience, falsifying catch documents, fishing in closed areas, and using prohibited gear. Global Fishing Watch uses AIS (Automatic Identification System) data to track 65,000 vessels. The Port State Measures Agreement enables inspections of foreign vessels. AEGFA integrates AIS and VMS data to flag suspicious vessel behavior patterns and dark vessel detection.",
+      "keywords": ["IUU fishing", "illegal fishing", "unreported", "vessel monitoring", "AIS", "dark vessel"],
+      "category": "fisheries"
+    },
+    {
+      "question": "What is sustainable seafood?",
+      "answer": "Sustainable seafood comes from sources — wild-caught or farmed — that can be maintained or increased over the long term without jeopardizing the health of the ecosystem. Certification schemes include MSC (Marine Stewardship Council) for wild-caught and ASC (Aquaculture Stewardship Council) for farmed seafood. Consumers can use Seafood Watch guides for purchasing decisions. Eco-labeling has driven improvements in global tuna and salmon fisheries. Reducing food waste and shifting diets from large predatory fish to smaller forage fish reduces ecological footprints. AEGFA's ecosystem models support science-based Maximum Sustainable Yield (MSY) calculations.",
+      "keywords": ["sustainable seafood", "MSC certification", "eco-label", "maximum sustainable yield", "MSY", "seafood watch"],
+      "category": "fisheries"
+    }
+  ],
+  "climate_change": [
+    {
+      "question": "How is climate change affecting sea levels?",
+      "answer": "Sea levels have risen 21-24 cm since 1880 and are accelerating. Current rate is 3.7mm/year — double the 20th century average. Two main causes: thermal expansion of warming water (about 40%) and melting ice sheets/glaciers (60%). Greenland ice sheet melt alone could raise seas by 7 meters. By 2100, sea levels may rise 0.3-1 meter under moderate scenarios, threatening 1 billion coastal inhabitants. Miami, Shanghai, Amsterdam, and Mumbai face significant inundation risks. Ocean.Net's SST/salinity models track thermohaline circulation changes affecting regional sea level.",
+      "keywords": ["sea level", "sea level rise", "coastal flooding", "ice sheet", "thermal expansion"],
+      "category": "climate_change"
+    },
+    {
+      "question": "What is ocean acidification?",
+      "answer": "The ocean absorbs 30% of atmospheric CO₂, which dissolves to form carbonic acid. Since the Industrial Revolution, ocean pH has dropped from 8.2 to 8.1 — a 30% increase in acidity. By 2100, pH could reach 7.8, conditions not seen for 14-17 million years. Acidification dissolves calcium carbonate shells of oysters, mussels, sea urchins, and corals. Pteropods (sea butterflies) — key food source for salmon and whales — show shell dissolution at current pH levels. AEGFA tracks real-time pH through dissolved oxygen and carbonate saturation indices.",
+      "keywords": ["ocean acidification", "pH", "carbonic acid", "CO2", "pteropod", "calcium carbonate"],
+      "category": "climate_change"
+    },
+    {
+      "question": "Is the ocean warming?",
+      "answer": "The ocean has absorbed 90% of the excess heat from global warming. The top 2,000m of the ocean has warmed by an average of 0.1°C since 1971, with surface ocean temperatures 0.15°C warmer per decade. Marine heatwaves — defined as 5+ consecutive days with temperatures in the top 10% — are now 34% more frequent. Warming shifts species poleward (fish moving 70km per decade toward poles), disrupts seasonal migration timing, and expands hypoxic zones. The AEGFA SST anomaly tracking module flags emerging marine heatwave events 10-14 days in advance.",
+      "keywords": ["ocean warming", "sea surface temperature", "SST", "marine heatwave", "heat", "thermal"],
+      "category": "climate_change"
+    },
+    {
+      "question": "What is the ocean's role in the carbon cycle?",
+      "answer": "The ocean is Earth's largest active carbon reservoir, containing 50x more carbon than the atmosphere. The biological pump transfers carbon from surface waters to the deep sea via sinking phytoplankton, fecal pellets, and dead organisms. The physical solubility pump dissolves CO₂ at cold high-latitude surfaces. Ocean carbon uptake has increased from 1.0 GtC/yr in the 1960s to 2.5 GtC/yr today. However, warming waters hold less CO₂, and permafrost thaw may release stored methane, creating dangerous feedback loops. Blue carbon ecosystems (mangroves, seagrasses, salt marshes) store carbon for millennia.",
+      "keywords": ["carbon cycle", "biological pump", "carbon sequestration", "blue carbon", "CO2 absorption", "carbon sink"],
+      "category": "climate_change"
+    },
+    {
+      "question": "What are marine heatwaves?",
+      "answer": "Marine heatwaves are prolonged periods of anomalously warm ocean temperatures (top 10th percentile for a given location and time of year for at least 5 days). They have increased in frequency by 34%, duration by 17%, and intensity by 54% between 1925 and 2016. The 2015-2016 'Blob' in the North Pacific killed millions of seabirds, triggered toxic algal blooms, and caused mass sea lion deaths. The 2016 Great Barrier Reef bleaching event was driven by a marine heatwave. AEGFA predicts marine heatwave onset and severity using ensemble SST model outputs.",
+      "keywords": ["marine heatwave", "MHW", "anomalous temperature", "heat blob", "reef bleaching", "thermal stress"],
+      "category": "climate_change"
+    },
+    {
+      "question": "How is Arctic sea ice changing?",
+      "answer": "Arctic sea ice extent in September (summer minimum) has declined 13% per decade since 1979. The Arctic is warming 4x faster than the global average (Arctic Amplification). Ice-free Arctic summers are projected by 2040-2070 under high emissions scenarios. Sea ice loss disrupts polar ecosystems, affecting ice-dependent species like polar bears, walruses, and Arctic cod. The positive feedback loop — open ocean absorbs more heat than reflective ice — accelerates warming. The loss of multiyear ice and changes in ice thickness alter ocean salinity and circulation patterns.",
+      "keywords": ["Arctic ice", "sea ice", "Arctic warming", "ice loss", "polar bear", "albedo feedback"],
+      "category": "climate_change"
+    },
+    {
+      "question": "What is the thermohaline circulation and how is climate change affecting it?",
+      "answer": "The thermohaline circulation (THC), also called the Atlantic Meridional Overturning Circulation (AMOC), is a global ocean conveyor belt driven by differences in water temperature and salinity. It transports warm surface water to the North Atlantic, where it cools, sinks, and flows back southward as cold deep water. AMOC is currently at its weakest in over 1,000 years. Freshwater influx from melting Greenland ice reduces North Atlantic salinity, preventing sinking and slowing the circulation. A collapse of AMOC would dramatically cool Northwestern Europe, disrupt monsoons, and raise sea levels along the US East Coast.",
+      "keywords": ["thermohaline", "AMOC", "ocean conveyor", "circulation", "Greenland melt", "freshwater"],
+      "category": "climate_change"
+    }
+  ],
+  "biodiversity": [
+    {
+      "question": "What is eDNA and how is it used?",
+      "answer": "Environmental DNA (eDNA) is genetic material shed by organisms into their surrounding environment — water, air, or soil. Marine eDNA is collected from seawater samples and analyzed using metabarcoding to identify species. A 1-liter water sample can detect hundreds of species. eDNA is 50x more sensitive than traditional netting methods for rare species detection. AEGFA's biodiversity module integrates eDNA sampling data with acoustic monitoring and VMS satellite tracking to build real-time species distribution maps with 0.92 classification accuracy.",
+      "keywords": ["eDNA", "environmental DNA", "metabarcoding", "species detection", "biodiversity monitoring"],
+      "category": "biodiversity"
+    },
+    {
+      "question": "What marine species are endangered?",
+      "answer": "IUCN lists over 1,550 marine species as threatened. Critically endangered include: vaquita porpoise (< 10 individuals remaining), hawksbill sea turtle, bluefin tuna, and staghorn coral. The North Atlantic right whale has fewer than 350 individuals. Threats include hunting, pollution, habitat destruction, climate change, and bycatch. Many deep-sea fish species facing commercial fishing are not yet assessed. Ocean.Net's Biodiversity Explorer tracks IUCN-listed species distributions using eDNA and satellite tag data integrated through AEGFA fusion layers.",
+      "keywords": ["endangered", "threatened species", "vaquita", "right whale", "bluefin tuna", "IUCN"],
+      "category": "biodiversity"
+    },
+    {
+      "question": "What is the ocean's total species count?",
+      "answer": "Scientists estimate 250,000-700,000 marine species exist, but only about 240,000 have been formally described. The Ocean Biodiversity Information System (OBIS) catalogs 120,000 validated species. New species are discovered at a rate of about 2,000 per year — mostly from the deep sea. The deep sea is so poorly explored that we have better maps of the Moon's surface than the ocean floor. Fish with 34,000 species represent the largest group of vertebrates. Invertebrates dominate marine biodiversity with crustaceans, mollusks, and polychaete worms being the most speciose groups.",
+      "keywords": ["species count", "marine species", "ocean biodiversity", "deep sea discovery", "OBIS", "taxonomy"],
+      "category": "biodiversity"
+    },
+    {
+      "question": "What is the significance of marine biodiversity for medicine?",
+      "answer": "Marine organisms are a rich source of novel bioactive compounds with pharmaceutical applications. Cytarabine (from Caribbean sponge Tethya crypta) treats leukemia. Ziconotide (from cone snail venom) is an FDA-approved painkiller 1,000x more potent than morphine. Coral-derived compounds show promise for treating breast cancer and HIV. Deep-sea microbes produce novel antibiotics and enzymes for industrial applications. Horseshoe crab blood — containing limulus amebocyte lysate (LAL) — is used to test every injectable drug and implant for bacterial contamination. Marine biodiversity loss risks losing these undiscovered compounds forever.",
+      "keywords": ["marine medicine", "bioactive compounds", "ocean drugs", "cytarabine", "ziconotide", "pharmaceutical"],
+      "category": "biodiversity"
+    },
+    {
+      "question": "What are invasive species in the marine environment?",
+      "answer": "Marine invasive species are non-native organisms introduced into new environments, primarily via ballast water in ships, aquaculture escapes, and hull fouling. The lionfish invasion in the Atlantic has devastated reef fish communities — adults consume up to 30 native fish per 30 minutes. Green crabs have restructured Atlantic seagrass beds and shellfish industries. The zebra mussel cost the US economy $1 billion in the 1990s alone. The IMO Ballast Water Management Convention (2017) requires ships to treat ballast water before discharge. AEGFA models potential spread trajectories of high-risk invasive species using current transport models.",
+      "keywords": ["invasive species", "lionfish", "ballast water", "alien species", "green crab", "bioinvasion"],
+      "category": "biodiversity"
+    },
+    {
+      "question": "What is ocean biodiversity loss?",
+      "answer": "Marine biodiversity is declining at rates comparable to past mass extinction events. Living Planet Index for marine species shows a 49% average decline since 1970. Megafauna (large animals) have declined most severely — large fish biomass in the ocean has fallen 90% since industrialized fishing began. Over 33% of shark and ray species are threatened with extinction. Local extinctions are already documented — the Chinese river dolphin (baiji) declared extinct in 2006. Ocean.Net's Biodiversity Index — a composite metric integrating species richness, population trends, and habitat quality — shows 3.2% annual decline in monitored reef systems.",
+      "keywords": ["biodiversity loss", "species decline", "extinction", "living planet index", "megafauna", "baiji"],
+      "category": "biodiversity"
+    },
+    {
+      "question": "What is the importance of zooplankton?",
+      "answer": "Zooplankton are microscopic animals and animal-like protists that form the critical link between phytoplankton and larger marine animals. Copepods — the dominant zooplankton group — may be the most abundant multicellular animals on Earth with an estimated 10^18 individuals. Krill provide the primary food source for whales, penguins, seals, and seabirds in polar ecosystems. Antarctic krill populations have declined by 80% since the 1970s due to sea ice loss. Zooplankton perform vertical migration daily — descending up to 1km at dawn and ascending at dusk — creating the largest migration on Earth and transporting carbon to the deep sea.",
+      "keywords": ["zooplankton", "copepod", "krill", "marine food web", "vertical migration", "carbon transport"],
+      "category": "biodiversity"
+    }
+  ],
+  "oceanography": [
+    {
+      "question": "How do ocean currents work?",
+      "answer": "Ocean currents are driven by two main forces: wind (surface currents) and density differences from temperature and salinity (thermohaline circulation or 'ocean conveyor belt'). The Gulf Stream carries 30x more water than all rivers combined at speeds up to 9 km/h. Surface currents influence weather patterns globally — El Niño causes the Pacific trade winds to weaken, warming the eastern Pacific and disrupting rainfall across the Americas and Asia. The AEGFA model ingests CMEMS real-time current velocity data (u,v components) to update marine ecosystem predictions hourly.",
+      "keywords": ["ocean currents", "thermohaline circulation", "Gulf Stream", "El Nino", "current velocity", "upwelling"],
+      "category": "oceanography"
+    },
+    {
+      "question": "What is ocean salinity?",
+      "answer": "Ocean salinity averages 35 PSU (practical salinity units — roughly 35 grams of salt per kilogram of water). The major constituents are chloride (55%), sodium (30.6%), sulfate, magnesium, and calcium. Salinity varies regionally: the Red Sea reaches 42 PSU due to high evaporation, while the Baltic Sea drops to 5 PSU from freshwater influx. Salinity affects water density, driving thermohaline circulation. Freshwater input from melting ice sheets is currently reducing North Atlantic salinity, potentially weakening AMOC circulation. AEGFA monitors salinity anomalies from Argo float arrays across 23 ocean basins.",
+      "keywords": ["salinity", "PSU", "salt", "ocean chemistry", "thermohaline", "AMOC", "argo float"],
+      "category": "oceanography"
+    },
+    {
+      "question": "What causes ocean tides?",
+      "answer": "Tides are caused by the gravitational pull of the Moon and Sun on Earth's oceans, combined with Earth's rotation. The Moon's gravity pulls water toward it, creating a tidal bulge. A corresponding bulge on the opposite side occurs due to inertia. As Earth rotates, most coastal areas experience two high and two low tides per day (semidiurnal). Spring tides (highest range) occur at new and full moon; neap tides (smallest range) at quarter moons. The Bay of Fundy, Canada, has the world's highest tidal range at 16 meters. Ocean.Net's tidal models use M2 tidal constituent data for fisheries habitat prediction.",
+      "keywords": ["tides", "tide", "tidal", "moon gravity", "spring tide", "neap tide", "tidal range"],
+      "category": "oceanography"
+    },
+    {
+      "question": "What is ocean temperature like?",
+      "answer": "Ocean temperature varies from -2°C in polar regions to 30°C+ in tropical surface waters. The thermocline — a rapid temperature gradient zone at 200-1000m depth — separates warm surface layers from cold deep water. Below 1000m, temperature is consistently between 0-4°C regardless of latitude. Sea Surface Temperature (SST) is one of the most critical parameters in AEGFA's model. NOAA OSTIA provides daily SST grids at 6km resolution. Ocean.Net processes these in real-time to detect marine heatwave events, predict coral bleaching risk, and forecast fish migration routes.",
+      "keywords": ["temperature", "SST", "sea surface temperature", "thermocline", "ocean heat", "thermal layer"],
+      "category": "oceanography"
+    },
+    {
+      "question": "What are ocean waves?",
+      "answer": "Ocean waves are oscillations of water surface caused primarily by wind friction, as well as submarine earthquakes (tsunamis) and tides. Wave energy depends on wind speed, duration, and fetch (distance over which wind blows). Significant wave height is the average of the highest 1/3 of waves. The largest recorded rogue wave was 29.1 meters in 2020 off Vancouver Island. Tsunamis have wavelengths of hundreds of km and travel at 800 km/h but have low amplitude on open ocean. AEGFA's wave model integrates CMEMS ERA5 reanalysis for wave height and period forecasting relevant to nearshore fisheries operations.",
+      "keywords": ["waves", "ocean waves", "tsunami", "wave height", "rogue wave", "swell", "fetch"],
+      "category": "oceanography"
+    },
+    {
+      "question": "What is El Nino and La Nina?",
+      "answer": "El Niño and La Niña are opposite phases of the El Niño-Southern Oscillation (ENSO), a climate pattern in the Pacific Ocean. During El Niño, trade winds weaken, allowing warm water to accumulate in the eastern Pacific, suppressing upwelling and dramatically reducing marine productivity along the South American coast. La Niña strengthens trade winds, intensifying upwelling and productivity. El Niño events increase global temperatures, cause droughts in Australia and Asia, and bring floods to the Americas. AEGFA integrates ENSO indices and SST anomalies to predict ecosystem impacts 6-12 months in advance with 0.87 correlation.",
+      "keywords": ["El Nino", "La Nina", "ENSO", "Pacific", "trade winds", "upwelling", "SST anomaly"],
+      "category": "oceanography"
+    },
+    {
+      "question": "How deep is the ocean?",
+      "answer": "The average depth of the ocean is 3,688 meters. The deepest point is Challenger Deep in the Mariana Trench at 10,935 meters — deep enough to submerge Mount Everest. Only about 20% of the ocean floor has been mapped at high resolution (better than 100m). The ocean is divided into zones by depth: sunlit (0-200m), twilight/mesopelagic (200-1000m), midnight/bathypelagic (1000-4000m), abyssal (4000-6000m), and hadal (>6000m). Pressure increases 1 atmosphere for every 10m of depth. The hadal zone contains extremophile organisms adapted to pressures over 1,000 atmospheres.",
+      "keywords": ["ocean depth", "Mariana Trench", "Challenger Deep", "ocean zones", "bathypelagic", "abyssal", "hadal"],
+      "category": "oceanography"
+    }
+  ]
+}
