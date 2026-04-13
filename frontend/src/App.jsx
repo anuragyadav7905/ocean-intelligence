@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
@@ -14,13 +14,13 @@ import Datasets from './components/Datasets';
 import Team from './components/Team';
 import Footer from './components/Footer';
 
-// Lazy-load all sub-pages (keeps landing page bundle lean)
-const ChatbotPage            = lazy(() => import('./components/ChatbotPage'));
-const Dashboard              = lazy(() => import('./components/Dashboard'));
-const FisheriesForecasting   = lazy(() => import('./components/FisheriesForecasting'));
-const BiodiversityExplorer   = lazy(() => import('./components/BiodiversityExplorer'));
-const AdaptiveFusion         = lazy(() => import('./components/AdaptiveFusion'));
-const InteractiveVisualizations = lazy(() => import('./components/InteractiveVisualizations'));
+// Direct imports — no lazy loading (avoids blank screen on navigation)
+import ChatbotPage            from './components/ChatbotPage';
+import Dashboard              from './components/Dashboard';
+import FisheriesForecasting   from './components/FisheriesForecasting';
+import BiodiversityExplorer   from './components/BiodiversityExplorer';
+import AdaptiveFusion         from './components/AdaptiveFusion';
+import InteractiveVisualizations from './components/InteractiveVisualizations';
 
 // ─── Loading splash (first visit per session) ─────────────────────────────────
 
@@ -105,9 +105,6 @@ function SectionWrapper({ children }) {
 }
 
 // ─── Reset scroll position on every route change ─────────────────────────────
-// PRIMARY fix for blank-page bug: without this, navigating from a scrolled
-// landing page keeps window.scrollY at e.g. 1500px, pushing feature page
-// content (which starts at 0) entirely out of the viewport.
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -115,19 +112,6 @@ function ScrollToTop() {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
-}
-
-// ─── Shared page loader spinner ────────────────────────────────────────────────
-
-function PageLoader({ label = 'Loading' }) {
-  return (
-    <div className="min-h-screen bg-[#0a0f1a] flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-        <span className="text-xs uppercase tracking-widest text-slate-500">{label}</span>
-      </div>
-    </div>
-  );
 }
 
 // ─── Global back-to-top button (all pages) ────────────────────────────────────
@@ -204,79 +188,21 @@ function LandingPage() {
   );
 }
 
-// ─── Animated route switcher ──────────────────────────────────────────────────
-// Correct Framer Motion + React Router v6 pattern:
-// AnimatePresence must have a motion element as its *direct* child.
-// Keying a motion.div (not <Routes>) gives proper enter/exit animations
-// without the blank-frame gap that the old <Routes key=…> approach caused.
-
-function AnimatedRoutes() {
-  const location = useLocation();
-
-  return (
-    <>
-      <ScrollToTop />
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={location.pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Routes location={location}>
-
-            <Route path="/" element={<LandingPage />} />
-
-            <Route path="/chatbot" element={
-              <Suspense fallback={<PageLoader label="Loading Chatbot" />}>
-                <ChatbotPage />
-              </Suspense>
-            } />
-
-            <Route path="/dashboard" element={
-              <Suspense fallback={<PageLoader label="Loading Dashboard" />}>
-                <Dashboard />
-              </Suspense>
-            } />
-
-            <Route path="/fisheries" element={
-              <Suspense fallback={<PageLoader label="Loading Fisheries" />}>
-                <FisheriesForecasting />
-              </Suspense>
-            } />
-
-            <Route path="/biodiversity" element={
-              <Suspense fallback={<PageLoader label="Loading Biodiversity" />}>
-                <BiodiversityExplorer />
-              </Suspense>
-            } />
-
-            <Route path="/fusion" element={
-              <Suspense fallback={<PageLoader label="Loading Fusion Engine" />}>
-                <AdaptiveFusion />
-              </Suspense>
-            } />
-
-            <Route path="/visualizations" element={
-              <Suspense fallback={<PageLoader label="Loading Visualizations" />}>
-                <InteractiveVisualizations />
-              </Suspense>
-            } />
-
-          </Routes>
-        </motion.div>
-      </AnimatePresence>
-    </>
-  );
-}
-
 // ─── Root ─────────────────────────────────────────────────────────────────────
 
 export default function App() {
   return (
     <BrowserRouter>
-      <AnimatedRoutes />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/"              element={<LandingPage />} />
+        <Route path="/chatbot"       element={<ChatbotPage />} />
+        <Route path="/dashboard"     element={<Dashboard />} />
+        <Route path="/fisheries"     element={<FisheriesForecasting />} />
+        <Route path="/biodiversity"  element={<BiodiversityExplorer />} />
+        <Route path="/fusion"        element={<AdaptiveFusion />} />
+        <Route path="/visualizations" element={<InteractiveVisualizations />} />
+      </Routes>
       <GlobalBackToTop />
     </BrowserRouter>
   );
