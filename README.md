@@ -114,20 +114,3 @@ Adaptive Ecological Graph Fusion Architecture (AEGFA):
 
 ---
 
-## 👥 Research Team
-
-| Name | Role |
-|---|---|
-| Anjum Rouf | Lead Researcher |
-| Mohd. Faisal | ML Engineer |
-| Anuja Sharma | Data Analyst |
-| Muli Sahithi Reddy | Data Analyst |
-| Anurag Singh Yadav | ML Engineer |
-| Rahul Mishra | Backend Developer |
-| Sneha Pandey | Frontend Developer |
-
----
-
-## 📝 License
-
-University Research Initiative — LPU, 2025. All rights reserved.
