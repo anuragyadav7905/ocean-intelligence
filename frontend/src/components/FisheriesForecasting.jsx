@@ -210,20 +210,30 @@ export default function FisheriesForecasting() {
   const meta        = CHART_META[activeFilter];
   const changeLabel = CHANGE_LABEL[activeFilter];
 
-  // Derived stats
-  const totalCatch = catchData.reduce((s, d) => s + d.Actual, 0);
-  const avgCPUE    = (cpueData.reduce((s, d) => s + d.cpue, 0) / cpueData.length).toFixed(1);
+  // Derived stats — show latest period's actual catch (not a sum), so values are
+  // clearly different between Monthly (~950–1780 t), Quarterly (~3000–5500 t),
+  // and Yearly (~11000–15000 t) making the filter switch obviously visible.
+  const latestCatch = catchData[catchData.length - 1].Actual;
+  const prevCatch   = catchData.length >= 2 ? catchData[catchData.length - 2].Actual : latestCatch;
+  const rawCatchPct = ((latestCatch - prevCatch) / prevCatch * 100);
+  const catchSign   = rawCatchPct >= 0 ? '+' : '';
+  const catchDir    = rawCatchPct >= 0 ? 'up' : 'down';
+  const catchChangeText = `${catchSign}${rawCatchPct.toFixed(1)}% ${changeLabel}`;
+
+  const avgCPUENum = cpueData.reduce((s, d) => s + d.cpue, 0) / cpueData.length;
+  const avgCPUE    = avgCPUENum.toFixed(1);
   const maxCpue    = Math.max(...cpueData.map(d => d.cpue));
   const highRegion = cpueData.reduce((a, b) => b.cpue > a.cpue ? b : a).region;
   const lowRegion  = cpueData.reduce((a, b) => b.cpue < a.cpue ? b : a).region;
 
+  // CPUE change: deviation from 24.5 kg/hr regional baseline
+  const cpuePctNum  = ((avgCPUENum - 24.5) / 24.5 * 100);
+  const cpueSign    = cpuePctNum >= 0 ? '+' : '';
+  const cpueDir     = cpuePctNum >= 0 ? 'up' : 'down';
+  const cpueChangeText = `${cpueSign}${cpuePctNum.toFixed(1)}% ${changeLabel}`;
+
   const catchSpark = catchData.map(d => d.Actual);
   const cpueSpark  = cpueData.map(d => d.cpue);
-
-  // CPUE change direction: compare last two catch data points
-  const cpueTrend = catchData.length >= 2
-    ? catchData[catchData.length - 1].Actual > catchData[catchData.length - 2].Actual ? 'up' : 'down'
-    : 'flat';
 
   return (
     <div className="min-h-screen bg-background text-on-background">
@@ -275,10 +285,10 @@ export default function FisheriesForecasting() {
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
           <StatCard
             icon={Fish}
-            label="Total Catch Volume"
-            value={`${totalCatch.toLocaleString()} t`}
-            changeDir="up"
-            changeText={`+8.3% ${changeLabel}`}
+            label="Latest Period Catch"
+            value={`${latestCatch.toLocaleString()} t`}
+            changeDir={catchDir}
+            changeText={catchChangeText}
             sparkData={catchSpark}
             delay={0.1}
           />
@@ -286,8 +296,8 @@ export default function FisheriesForecasting() {
             icon={BarChart2}
             label="CPUE (kg / hr)"
             value={avgCPUE}
-            changeDir={cpueTrend}
-            changeText={`${cpueTrend === 'up' ? '+' : '-'}3.2% ${changeLabel}`}
+            changeDir={cpueDir}
+            changeText={cpueChangeText}
             sparkData={cpueSpark}
             delay={0.15}
           />
@@ -329,7 +339,7 @@ export default function FisheriesForecasting() {
             delay={0.3}
           >
             <ResponsiveContainer width="100%" height={240}>
-              <LineChart data={catchData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
+              <LineChart key={activeFilter} data={catchData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
                 <CartesianGrid stroke={GRID} strokeDasharray="4 4" />
                 <XAxis dataKey="month" tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} domain={['auto', 'auto']} />
@@ -352,7 +362,7 @@ export default function FisheriesForecasting() {
             delay={0.35}
           >
             <ResponsiveContainer width="100%" height={240}>
-              <BarChart data={cpueData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
+              <BarChart key={activeFilter} data={cpueData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
                 <CartesianGrid stroke={GRID} strokeDasharray="4 4" vertical={false} />
                 <XAxis dataKey="region" tick={{ fill: AXIS, fontSize: 10 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} domain={[0, 38]} />
@@ -381,7 +391,7 @@ export default function FisheriesForecasting() {
             className="lg:col-span-2"
           >
             <ResponsiveContainer width="100%" height={280}>
-              <AreaChart data={speciesData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
+              <AreaChart key={activeFilter} data={speciesData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
                 <defs>
                   {[['pelGrad', TEAL], ['demGrad', CYAN], ['crsGrad', EMERALD], ['cphGrad', SKY]].map(([id, color]) => (
                     <linearGradient key={id} id={id} x1="0" y1="0" x2="0" y2="1">

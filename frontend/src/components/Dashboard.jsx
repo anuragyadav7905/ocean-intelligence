@@ -105,14 +105,14 @@ function Sparkline({ data, color }) {
 // ─── Stat card ───────────────────────────────────────────────────────────────
 
 function StatCard({ icon: Icon, label, value, unit, changeVal, changeLabel, sparkData, delay }) {
-  const dir = changeVal > 0 ? 'up' : changeVal < 0 ? 'down' : 'flat';
+  const isZero = changeVal === 0 || Math.abs(changeVal) < 0.005;
+  const dir = isZero ? 'flat' : changeVal > 0 ? 'up' : 'down';
   const TrendIcon = dir === 'up' ? TrendingUp : dir === 'down' ? TrendingDown : Minus;
   const trendColor = dir === 'up' ? 'text-red-400' : dir === 'down' ? 'text-cyan-400' : 'text-on-surface-variant';
   const sign = changeVal > 0 ? '+' : '';
 
   return (
     <motion.div
-      key={`${label}-${value}`}
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.45 }}
@@ -131,7 +131,10 @@ function StatCard({ icon: Icon, label, value, unit, changeVal, changeLabel, spar
       <div className="text-xs text-on-surface-variant uppercase tracking-widest mb-3">{label}</div>
       <div className={`flex items-center gap-1 text-xs font-medium ${trendColor}`}>
         <TrendIcon size={13} />
-        <span>{sign}{changeVal} {changeLabel}</span>
+        {isZero
+          ? <span>Stable — no change</span>
+          : <span>{sign}{changeVal} {changeLabel}</span>
+        }
       </div>
     </motion.div>
   );
@@ -290,7 +293,7 @@ export default function Dashboard() {
 
           <ChartCard title="Sea Surface Temperature" subtitle={meta.sstSub}>
             <ResponsiveContainer width="100%" height={240}>
-              <AreaChart data={sstChartData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
+              <AreaChart key={activeFilter} data={sstChartData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
                 <defs>
                   <linearGradient id="sstGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%"  stopColor={TEAL} stopOpacity={0.25} />
@@ -304,7 +307,10 @@ export default function Dashboard() {
                   axisLine={false} tickLine={false}
                   interval={xInterval}
                 />
-                <YAxis tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false} domain={['auto', 'auto']} />
+                <YAxis
+                  tick={{ fill: AXIS, fontSize: 11 }} axisLine={false} tickLine={false}
+                  domain={[min => Math.floor(min - 1), max => Math.ceil(max + 1)]}
+                />
                 <Tooltip contentStyle={TOOLTIP_STYLE} />
                 <Area
                   type="monotone" dataKey="SST" stroke={TEAL} strokeWidth={2}
@@ -341,7 +347,7 @@ export default function Dashboard() {
         {/* ── Row 3: Multi-parameter chart ── */}
         <ChartCard title="Multi-Parameter Ocean Trends" subtitle={meta.multiSub}>
           <ResponsiveContainer width="100%" height={280}>
-            <LineChart data={multiData} margin={{ top: 4, right: 24, left: -16, bottom: 0 }}>
+            <LineChart key={activeFilter} data={multiData} margin={{ top: 4, right: 24, left: -16, bottom: 0 }}>
               <CartesianGrid stroke={GRID} strokeDasharray="4 4" />
               <XAxis
                 dataKey="month"
