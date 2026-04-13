@@ -5,22 +5,22 @@ const steps = [
   {
     num: 1,
     title: 'Multi-Modal Data Acquisition',
-    desc: 'Sourcing satellite imagery, sub-sea sensor logs, and oceanic climate indices from global monitoring stations.',
+    desc: 'Collecting ocean data from satellites, underwater sensors, and weather stations worldwide.',
   },
   {
     num: 2,
     title: 'Graph Node Embedding',
-    desc: 'Representing marine variables as multi-dimensional vectors in a relational graph for structural pattern analysis.',
+    desc: 'Turning ocean data like temperature and salinity into connected points in a network to find patterns.',
   },
   {
     num: 3,
     title: 'Ecological Graph Attention',
-    desc: 'Applying self-attention mechanisms to weigh environmental influences dynamically across spatial-temporal contexts.',
+    desc: 'The system automatically decides which ocean factors matter most based on time and location.',
   },
   {
     num: 4,
     title: 'Adaptive Fusion',
-    desc: 'Synthesizing local and global environmental features into a unified knowledge state using cross-modal alignment.',
+    desc: 'Combining local and global ocean data into one complete picture.',
   },
 ];
 

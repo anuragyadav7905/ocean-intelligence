@@ -91,8 +91,7 @@ export default function About() {
             <p className="text-lg text-on-surface-variant mb-8 leading-relaxed">
               Our proprietary{' '}
               <span className="text-on-surface font-medium">Adaptive Ecological Graph Fusion Architecture (AEGFA)</span>{' '}
-              bridges the gap between disparate marine data streams. By treating oceanic variables as interconnected
-              nodes in a dynamic graph, we enable real-time prediction and deep semantic understanding of biodiversity shifts.
+              brings together ocean environment data, fishing records, and species information into a single connected system. Instead of analyzing each type of data alone, it treats them as linked parts of one bigger picture — making predictions about marine life more accurate and real-time.
             </p>
             <div className="flex flex-wrap gap-3">
               {[

@@ -29,7 +29,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-sm text-on-surface-variant text-center md:text-right">
-          <p>© 2025 Ocean.Net</p>
+          <p>© 2026 Ocean.Net</p>
           <p className="text-xs opacity-60 mt-0.5">University Research Initiative · LPU</p>
         </div>
       </div>

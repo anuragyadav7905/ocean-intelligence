@@ -2,13 +2,13 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const team = [
-  { name: 'Anjum Rouf', role: 'Lead Researcher', initials: 'AR', color: 'from-primary to-primary-container' },
-  { name: 'Mohd. Faisal', role: 'ML Engineer', initials: 'MF', color: 'from-secondary to-secondary-container' },
-  { name: 'Anuja Sharma', role: 'Data Analyst', initials: 'AS', color: 'from-primary to-secondary' },
-  { name: 'Muli Sahithi Reddy', role: 'Data Analyst', initials: 'MS', color: 'from-tertiary to-secondary' },
-  { name: 'Anurag Singh Yadav', role: 'ML Engineer', initials: 'AY', color: 'from-primary to-tertiary' },
-  { name: 'Rahul Mishra', role: 'Backend Developer', initials: 'RM', color: 'from-secondary to-primary' },
-  { name: 'Sneha Pandey', role: 'Frontend Developer', initials: 'SP', color: 'from-primary-container to-secondary-container' },
+  { name: 'Anjum Rouf', role: 'FACULTY', initials: 'AR', color: 'from-primary to-primary-container' },
+  { name: 'Mohd. Faisal', role: 'STUDENT', initials: 'MF', color: 'from-secondary to-secondary-container' },
+  { name: 'Anuja Sharma', role: 'STUDENT', initials: 'AS', color: 'from-primary to-secondary' },
+  { name: 'Muli Sahithi Reddy', role: 'STUDENT', initials: 'MS', color: 'from-tertiary to-secondary' },
+  { name: 'Anurag Singh Yadav', role: 'STUDENT', initials: 'AY', color: 'from-primary to-tertiary' },
+  { name: 'Rahul Mishra', role: 'STUDENT', initials: 'RM', color: 'from-secondary to-primary' },
+  { name: 'Sneha Pandey', role: 'STUDENT', initials: 'SP', color: 'from-primary-container to-secondary-container' },
 ];
 
 const container = {
@@ -36,7 +36,8 @@ export default function Team() {
         >
           <h2 className="section-title mb-4">The Research Team</h2>
           <p className="section-subtitle">
-            LPU University Research Division — Multidisciplinary experts in marine biology, neural networks, and data science.
+            Led by a faculty mentor and driven by passionate students, this project explores <br />
+            AI-powered ocean intelligence using data science and modern technologies.
           </p>
         </motion.div>
 
