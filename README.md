@@ -168,13 +168,13 @@ The Adaptive Ecological Graph Fusion Architecture (AEGFA) is the core algorithmi
 
 | Name | Role |
 |---|---|
-| Anjum Rouf | Faculty Advisor |
-| Sneha Pandey | Lead Researcher |
-| Mohd. Faisal | ML Engineer |
-| Anuja Sharma | Marine Biologist |
-| Muli Sahithi Reddy | Graph Theorist |
-| Anurag Singh Yadav | Cloud Systems |
-| Rahul Mishra | Frontend Dev |
+| Anjum Rouf | Faculty |
+| Sneha Pandey | Student |
+| Mohd. Faisal | Student |
+| Anuja Sharma | Student |
+| Muli Sahithi Reddy | Student |
+| Anurag Singh Yadav | Student |
+| Rahul Mishra | Student |
 
 School of Computer Science and Engineering, Lovely Professional University, Phagwara, India
 
