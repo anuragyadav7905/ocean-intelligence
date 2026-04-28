@@ -1,0 +1,48 @@
+05_nlp_init.txt — nlp_engine.py: NLPEngine class & knowledge load
+==================================================================
+
+What this screen shows
+----------------------
+The `NLPEngine` class definition, its constructor, and the
+`_load_and_fit` helper that ingests the knowledge base and builds
+the TF-IDF index.
+
+Line-by-line walkthrough
+------------------------
+Lines 23–32 `__init__` initialises the per-instance state:
+              • `self.stemmer` — Porter stemmer.
+              • `self.stop_words` — set of English stopwords (sets
+                give O(1) membership checks).
+              • `self.vectorizer` — a fresh TfidfVectorizer.
+              • `self.documents` — the corpus of full text used to
+                build TF-IDF vectors.
+              • `self.questions` — the raw FAQ questions in the same
+                order as `documents` (used for the "matched_question"
+                response field).
+              • `self.metadata` — parallel list of dicts holding
+                category and keywords for each entry.
+              • `self.tfidf_matrix` — populated after fit.
+              • Finally, `_load_and_fit()` is called so the engine is
+                ready immediately after construction.
+
+Lines 34–37 `_load_and_fit` opens `knowledge_base.json` (utf-8) and
+            loads it as a Python dict.
+Lines 39–51 Iterates every category and every entry inside it. For
+            each entry it appends to three parallel lists:
+              • the raw question (used to surface "matched_question");
+              • a combined document = question + answer + keywords,
+                which gives TF-IDF a richer feature space than the
+                question alone;
+              • a metadata record holding question, answer, category
+                and keyword list for later look-up.
+Lines 53–54 Preprocesses every document (lower-case, regex clean,
+            stopword removal, stem) and fits the TF-IDF vectoriser
+            against the cleaned corpus, storing the resulting sparse
+            matrix on `self.tfidf_matrix`. After this line the engine
+            is ready to answer queries.
+
+Why it matters
+--------------
+This constructor turns a JSON file into a numerical search index in
+a single, reproducible step — and it does so once at server start so
+each chat request only pays the cheap query cost.

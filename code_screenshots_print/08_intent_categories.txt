@@ -1,0 +1,35 @@
+08_intent_categories.txt — intent_classifier.py: CATEGORY_LABELS
+=================================================================
+
+What this screen shows
+----------------------
+The lookup table that maps internal intent codes (the labels the
+Naive Bayes model is actually trained on) to user-friendly display
+names that get returned to the React frontend.
+
+Line-by-line walkthrough
+------------------------
+Line 23      Declares `CATEGORY_LABELS` as a module-level dictionary.
+             Module level is intentional — it is read by the
+             `classify` method on every request and never mutated.
+Lines 24–32  Each entry follows the pattern
+             `'<machine code>': '<human label>'`:
+               • `marine_animals` → "Marine Animals"
+               • `coral_reefs`    → "Coral Reefs"
+               • `ocean_pollution`→ "Ocean Pollution"
+               • `ecosystems`     → "Ocean Ecosystems"
+               • `fisheries`      → "Fisheries"
+               • `climate_change` → "Climate Change"
+               • `biodiversity`   → "Biodiversity"
+               • `oceanography`   → "Oceanography"
+               • `unknown`        → "General Inquiry"   ← the fallback
+                 used when no category fires confidently.
+Line 33      Closes the dictionary literal.
+
+Why it matters
+--------------
+This dictionary is the contract between the model and the UI. The
+training labels stay in tidy snake_case (good for ML pipelines) while
+the chat UI shows the polished title-case version. Adding a new
+intent is as simple as adding a new pair here and including some
+training rows in the knowledge base.

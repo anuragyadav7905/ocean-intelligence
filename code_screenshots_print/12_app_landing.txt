@@ -1,0 +1,45 @@
+12_app_landing.txt — App.jsx: LandingPage component
+====================================================
+
+What this screen shows
+----------------------
+The top-level component that renders the long-scroll landing page,
+including the first-visit loading screen and the fade-in for all the
+section components.
+
+Line-by-line walkthrough
+------------------------
+Lines 153–159 `loading` state, initialised lazily so the loading
+              screen plays only on the **first** visit per browser
+              session:
+                • `sessionStorage.getItem('ocean-loaded')` — if this
+                  flag exists the user has already seen the
+                  loader, so initialise to `false`.
+                • Otherwise set the flag and initialise to `true` so
+                  the loader plays once.
+              Using lazy initialisation (a function inside `useState`)
+              ensures sessionStorage is only read on first render.
+Lines 162–165 `<AnimatePresence>` wraps the conditional
+              `<LoadingScreen />`. AnimatePresence is what makes
+              `framer-motion` play the **exit** animation when
+              `loading` flips to `false`. Calling `setLoading(false)`
+              from `onDone` removes the loader and unblocks the page.
+Lines 167–186 Once loading is over, a `motion.div` fades the whole
+              page in (`opacity 0 → 1` over 0.5 s) and renders:
+                • a single `<Navbar />`,
+                • a `<main>` containing all the marketing/info
+                  sections, each wrapped in `<SectionWrapper>` for
+                  consistent spacing/scroll-snap behaviour,
+                • the `<Footer />`.
+              The order of `<SectionWrapper>` children mirrors the
+              vertical order of the page: Hero → About → Features →
+              Pipeline → Chatbot teaser → Benchmarking → Datasets →
+              Team.
+Lines 187–189 Closing fragment, function close brace.
+
+Why it matters
+--------------
+This component is the "front door" of the entire site. It controls
+two important UX details — the once-per-session loader and the
+cross-fade — without coupling them to any of the section components,
+which keeps the rest of the app simple.

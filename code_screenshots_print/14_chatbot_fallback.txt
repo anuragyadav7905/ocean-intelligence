@@ -1,0 +1,35 @@
+14_chatbot_fallback.txt — Chatbot.jsx: getFallbackResponse()
+=============================================================
+
+What this screen shows
+----------------------
+A small utility that returns a canned, on-topic answer when the
+backend cannot be reached. It gives the chatbot a graceful "offline
+mode" instead of erroring out.
+
+Line-by-line walkthrough
+------------------------
+Line 43  Exports the helper so the main `Chatbot` component can call
+         it from inside its `catch` block.
+Line 44  Lower-cases the user's query so keyword matching is
+         case-insensitive.
+Lines 45–47 Iterates over `FALLBACK_RESPONSES` (defined elsewhere in
+            the file). Each entry has:
+              • `keys` — an array of trigger keywords.
+              • `text` — the canned reply.
+            The `entry.keys.some(...)` short-circuits as soon as any
+            keyword from the entry appears in the query, returning
+            that entry's `text`. The `k && q.includes(k)` guard
+            silently skips empty/falsy keys.
+Line 48  If no entry matched, the function returns the **last** item
+         in the list — by convention this is the generic catch-all
+         response.
+Line 49  Closes the function.
+
+Why it matters
+--------------
+Networks fail. APIs go down. Without this, a backend hiccup would
+show the user a raw error toast. Instead, the UI silently flips into
+"local knowledge" mode, displays a sensible answer, and labels the
+message metadata as "Source: Built-in knowledge (backend offline)"
+(see screenshot 16) so users know what's happening.

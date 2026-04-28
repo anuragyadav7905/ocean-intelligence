@@ -1,0 +1,49 @@
+09_intent_train.txt — intent_classifier.py: _train()
+=====================================================
+
+What this screen shows
+----------------------
+The private training routine. It reads the same JSON knowledge base
+the NLP engine uses, builds a labelled text dataset out of it, and
+fits a TF-IDF + Multinomial Naive Bayes pipeline.
+
+Line-by-line walkthrough
+------------------------
+Lines 50–53 Opens `knowledge_base.json` and parses it into a Python
+            dict. The KB is the single source of truth — both models
+            train on the same data so they stay in sync.
+Line  55    Initialises two parallel lists: `texts` (the input rows)
+            and `labels` (the category each row belongs to).
+Lines 56–63 Walks every category and every entry. For each entry it:
+              • concatenates the question, the answer and the
+                keywords into one combined string — this gives Naive
+                Bayes more vocabulary to learn from than the question
+                alone;
+              • runs that string through the shared `_preprocess`
+                helper (lower-case, strip punctuation, remove
+                stopwords, stem) so feature extraction matches the
+                NLP engine;
+              • appends the resulting clean text plus the category
+                label.
+Line  65    Encodes string labels (`marine_animals`, `coral_reefs`, …)
+            into integers using the LabelEncoder. Naive Bayes needs
+            numeric class indices; the encoder is kept on `self` so
+            we can decode predictions back to readable labels later.
+Lines 67–70 Builds a scikit-learn `Pipeline` with two stages:
+              1. `TfidfVectorizer(ngram_range=(1, 2), min_df=1)` —
+                 unigrams **and** bigrams catch phrases like
+                 "coral bleaching" as a single feature; `min_df=1`
+                 keeps every term, which is fine on a small KB.
+              2. `MultinomialNB(alpha=0.5)` — Multinomial Naive Bayes
+                 with mild Laplace smoothing (alpha=0.5) so unseen
+                 words don't crash to zero probability.
+Line  71    Fits the whole pipeline in a single call. After this line
+            `self.pipeline.predict_proba(...)` is ready for inference.
+
+Why it matters
+--------------
+This method is run once at startup. It produces a small, fast,
+explainable classifier that pairs nicely with the TF-IDF retriever
+in `nlp_engine.py`: retrieval finds the closest answer, while this
+classifier independently tags the topic — and the API blends the two
+confidences so the response is robust even when one signal is weak.

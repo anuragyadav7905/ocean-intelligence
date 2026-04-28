@@ -1,0 +1,40 @@
+01_app_imports.png — app.py: Imports & Service Initialization
+================================================================
+
+What this screen shows
+----------------------
+The opening section of `app.py`, the Flask backend that powers the
+Ocean.Net AI chatbot. It imports the web framework, sets up CORS, and
+boots the two AI components that the rest of the file relies on.
+
+Line-by-line walkthrough
+------------------------
+Lines 1–4   Module docstring describing the file's purpose and the
+            primary endpoint (POST /api/chat).
+Line  5     Imports Flask itself plus `request` (for reading the
+            incoming JSON body) and `jsonify` (for sending JSON
+            responses).
+Line  6     Imports `CORS` from flask_cors so the React frontend
+            (running on a different port) can call this API in the
+            browser without being blocked by the same-origin policy.
+Line  7     Imports the custom `NLPEngine` class from `nlp_engine.py`
+            — this is the TF-IDF + cosine-similarity matcher.
+Line  8     Imports the custom `IntentClassifier` class from
+            `intent_classifier.py` — this is the Naive Bayes model.
+Line 10     Creates the Flask application instance.
+Line 11     Enables CORS for the local Vite dev server (port 5173),
+            an alternative dev port (3000), and a wildcard origin so
+            the API stays open during development.
+Lines 13–16 Console banner. The two models are heavy to construct
+            (they load a knowledge base and fit vectorisers), so they
+            are instantiated **once at module load time**. Subsequent
+            requests reuse the warm objects, which keeps `/api/chat`
+            fast.
+Line 17     Final readiness message printed to the terminal once both
+            models are live and the server is about to start.
+
+Why it matters
+--------------
+This block establishes the runtime: a Flask app with CORS, a single
+shared NLP engine, and a single shared intent classifier. Every
+request handled later in the file uses these two global objects.

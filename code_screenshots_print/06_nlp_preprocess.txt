@@ -1,0 +1,34 @@
+06_nlp_preprocess.txt — nlp_engine.py: _preprocess helper
+==========================================================
+
+What this screen shows
+----------------------
+The private text-cleaning routine that every document and every
+incoming query is run through before it ever reaches TF-IDF.
+
+Line-by-line walkthrough
+------------------------
+Line 56 Method signature. Takes a string, returns a string — pure
+        function, no side effects.
+Line 57 Docstring listing the four operations performed.
+Line 58 Lower-cases the text so that "Coral", "coral" and "CORAL"
+        all collapse to the same token.
+Line 59 Replaces every non-alphanumeric, non-whitespace character
+        with a space. Punctuation, emojis and stray symbols disappear
+        without merging adjacent words.
+Line 60 Splits on whitespace into tokens.
+Line 61 Single-pass list comprehension that:
+          • stems each token (`fish`, `fishing`, `fished` → `fish`);
+          • drops English stopwords (`the`, `is`, `at`, …);
+          • drops single-character tokens, which are almost always
+            noise after punctuation stripping.
+Line 62 Re-joins the surviving tokens with single spaces — the
+        TfidfVectorizer expects a flat string per document.
+
+Why it matters
+--------------
+Consistency. Because the same `_preprocess` is used both during
+fitting (offline) and during querying (online), the vector spaces
+align perfectly, so cosine similarity is meaningful. Stripping
+stopwords and stemming also keeps the vocabulary small, which makes
+cosine matching more robust on short user inputs.

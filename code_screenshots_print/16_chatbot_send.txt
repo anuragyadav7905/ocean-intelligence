@@ -1,0 +1,62 @@
+16_chatbot_send.txt — Chatbot.jsx: sendMessage() — calling /api/chat
+====================================================================
+
+What this screen shows
+----------------------
+The async function that fires when the user submits a message. It
+optimistically appends the user's message, calls the Flask backend,
+and either appends the bot's answer or falls back to the offline
+helper if anything goes wrong.
+
+Line-by-line walkthrough
+------------------------
+Line 73       `sendMessage` accepts an optional `overrideText`. The
+              landing page's example chips use this so a click can
+              send a pre-written question without touching the input.
+Lines 74–75   Pick the right text source: `overrideText` if defined,
+              otherwise the controlled `input`. Trim whitespace and
+              bail out if the result is empty or a request is
+              already running.
+
+Lines 77–79   Optimistic UI updates **before** the network call:
+                • append the user's message to the list,
+                • clear the input box,
+                • flip `loading` on so the UI shows a spinner.
+              This keeps the chat feeling instantaneous.
+
+Lines 81–86   Begins the `try` block. Calls
+              `fetch(`${import.meta.env.VITE_API_URL}/api/chat`)`
+              with a JSON body shaped exactly like the Flask
+              endpoint expects: `{ message: text }`. Using an env var
+              for the base URL lets the same code run against
+              localhost in development and a production host in prod.
+
+Lines 88–89   Treat any non-2xx response as a server error so the
+              `catch` branch can take over. Otherwise parse the JSON
+              body — it includes `response`, `intent` and
+              `confidence` (see screenshot 02 for the response shape).
+
+Lines 91–98   On success, append a bot message with:
+                • `role: 'bot'`,
+                • `text: data.response`,
+                • a `meta` string showing the intent label and
+                  confidence as a percentage. The
+                  `(data.confidence * 100).toFixed(0)` converts the
+                  0–1 score into a clean integer percent.
+
+Lines 99–108  On error, call `getFallbackResponse(text)` from
+              screenshot 14 to get a built-in answer, append it as a
+              bot message, and stamp the meta with
+              `Source: Built-in knowledge (backend offline)` so the
+              user knows the answer didn't come from the API.
+
+Lines 109–111 `finally` always flips `loading` back to false so the
+              UI re-enables the send button regardless of outcome.
+Line 112      Closes the function.
+
+Why it matters
+--------------
+This is where the React UI meets the Flask API. The combination of
+optimistic updates, structured success path, fallback path, and a
+guaranteed `finally` gives the chatbot a polished, reliable feel —
+even when the backend is unreachable.
