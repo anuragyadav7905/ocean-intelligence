@@ -1,41 +1,4 @@
-04_nlp_imports.txt — nlp_engine.py: Imports & Setup
-====================================================
-
-What this screen shows
-----------------------
-The top of `nlp_engine.py`. This file is the project's classical NLP
-pipeline: tokenisation, stopword removal, stemming, TF-IDF vectorisation,
-and cosine-similarity matching against a knowledge base.
-
-Line-by-line walkthrough
-------------------------
-Lines 1–4   Module docstring summarising the pipeline stages.
-Lines 5–9   Standard library and numerical imports:
-              • `json` — to load the knowledge base file.
-              • `re`   — regular expressions, used to strip
-                          punctuation in `_preprocess`.
-              • `string` — utility constants (kept for completeness).
-              • `Path` from pathlib — clean cross-platform paths.
-              • `numpy` — used later for `argmax` over similarity
-                          scores.
-Line 11     Imports the NLTK toolkit.
-Lines 12–13 Pulls in the English stopword list and the Porter
-            stemmer — the classic combination for shrinking words to
-            a common root (e.g. *fishing*, *fished*, *fishes* → *fish*).
-Lines 14–15 Imports scikit-learn's TF-IDF vectoriser and the cosine
-            similarity helper. Together these turn text into vectors
-            and measure how close two vectors are.
-Lines 17–19 On the very first run NLTK needs its `stopwords` and
-            `punkt` data packages. The `quiet=True` flag stops the
-            download from spamming the console.
-Line 21     Computes the absolute path to `knowledge_base.json`,
-            located next to this file. Using `Path(__file__).parent`
-            means the file is found no matter where the server is
-            launched from.
-
-Why it matters
---------------
-This block wires up every dependency the `NLPEngine` class needs.
-The choice of TF-IDF + cosine similarity is deliberate: it is fast,
-deterministic, and works well on a small curated knowledge base
-without needing a GPU.
+Top section of nlp_engine.py where all the libraries are loaded.
+We use NLTK for stop words and the Porter stemmer, and scikit-learn for TF-IDF and cosine similarity.
+The first time the code runs, NLTK downloads its stopwords and punkt data quietly in the background.
+KB_PATH points to knowledge_base.json sitting next to this file, so paths work on any computer.

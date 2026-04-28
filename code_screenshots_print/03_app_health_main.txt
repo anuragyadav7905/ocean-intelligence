@@ -1,35 +1,4 @@
-03_app_health_main.png — app.py: Health, Index & Server Bootstrap
-==================================================================
-
-What this screen shows
-----------------------
-The remaining routes of `app.py` — a health probe, a friendly index
-route, and the `__main__` block that actually starts the server.
-
-Line-by-line walkthrough
-------------------------
-Lines 56–64 `GET /api/health`. A lightweight status endpoint used by
-            the dashboard and by deployment monitors. It returns:
-              • `status: ok`
-              • the service name
-              • a semantic version
-              • a list of which models are loaded so callers can tell
-                whether the NLP engine and intent classifier are
-                online.
-Lines 67–72 `GET /` — the root index. Instead of returning a 404, it
-            serves a tiny self-describing JSON message that explains
-            how to call `/api/chat` and points to `/api/health` for
-            system status. Useful when someone hits the API in a
-            browser by mistake.
-Lines 75–76 Standard Python `if __name__ == '__main__':` entry point.
-            Runs the Flask dev server on port 5000, bound to all
-            interfaces (`0.0.0.0`) so the React app on another port
-            can reach it. Debug mode is on for hot-reload during
-            development.
-
-Why it matters
---------------
-These routes round out the API surface (chat + health + root) and
-make `app.py` runnable directly with `python app.py`. The health
-endpoint is what the frontend's status badge polls to show whether
-the backend is alive.
+Two extra small routes plus the line that actually starts the server.
+/api/health is a simple status check that tells you the version and which models are loaded.
+The / route just returns a short JSON note showing how to use the API instead of an error page.
+At the bottom, app.run starts Flask on port 5000 with debug mode on for development.

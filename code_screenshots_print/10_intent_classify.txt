@@ -1,40 +1,4 @@
-10_intent_classify.txt — intent_classifier.py: classify()
-==========================================================
-
-What this screen shows
-----------------------
-The public inference method. Given a user query it returns the
-predicted intent (human label + machine code) and the model's
-confidence in that prediction.
-
-Line-by-line walkthrough
-------------------------
-Line 73     Signature: takes the raw query string, returns a dict.
-Line 75     Runs the query through the same `_preprocess` used at
-            training time. Identical preprocessing is what keeps the
-            train/serve feature distributions aligned.
-Line 76     `predict_proba` returns a 2-D array of shape
-            (1, n_classes). The `[0]` peels off that single row to
-            get a 1-D probability vector across every category.
-Line 77     `np.argmax` finds the index of the most likely class.
-            The `int(...)` cast keeps things JSON-friendly.
-Line 78     Uses the LabelEncoder fitted in `_train()` to invert the
-            integer back to its original string code (e.g. 4 →
-            'fisheries'). The `[0]` unwraps the numpy array result.
-Line 79     Reads the probability for the winning class and casts it
-            to a plain float — that becomes the confidence score.
-Lines 81–84 Builds the response dict:
-              • `intent`     — the human-friendly label looked up in
-                               `CATEGORY_LABELS`, defaulting to
-                               "General Inquiry" if the code is
-                               unexpected.
-              • `intent_code`— the raw snake_case label.
-              • `confidence` — rounded to 4 decimals to match the
-                               precision used in `app.py`.
-
-Why it matters
---------------
-This is the second of the two AI calls inside `/api/chat`. Its
-output is blended with the cosine similarity score from the NLP
-engine (60/40 weighting in `app.py`) to produce the final
-confidence number the UI displays as a percentage.
+classify is the function that predicts the intent for a single user message.
+It cleans the query, asks the pipeline for class probabilities, and picks the highest one with argmax.
+LabelEncoder is used in reverse to turn the predicted number back into the category code.
+It returns the readable intent name, the code, and the confidence value rounded to 4 decimals.

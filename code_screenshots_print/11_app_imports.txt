@@ -1,41 +1,4 @@
-11_app_imports.txt — App.jsx: Imports
-=======================================
-
-What this screen shows
-----------------------
-The top of the React frontend's root component. It pulls in every
-hook, router primitive, animation library and page component the app
-uses.
-
-Line-by-line walkthrough
-------------------------
-Line  1    `useState` and `useEffect` from React — core hooks for
-           state and side-effects.
-Line  2    React Router primitives:
-             • `BrowserRouter` wraps the app to enable history-based
-               URLs.
-             • `Routes` / `Route` declare the URL → component map.
-             • `useLocation` lets nested utilities react to URL
-               changes.
-Line  3    `framer-motion` for the page-fade animations:
-             • `motion` — animatable HTML wrappers.
-             • `AnimatePresence` — manages mount/unmount transitions
-               (used by the loading screen).
-Line  4    `ChevronUp` icon from lucide-react, used in the
-           Back-to-Top control.
-Lines 6–15 Section components composed onto the landing page (Navbar,
-           Hero, About, Features, Pipeline, Chatbot teaser,
-           Benchmarking, Datasets, Team, Footer). Each lives in its
-           own file under `./components/`.
-Lines 17–23 Standalone full-page routes. The comment notes that they
-           are imported eagerly **on purpose** — lazy-loading them
-           caused a brief blank screen during navigation, so the
-           team chose simplicity over a slightly smaller initial
-           bundle.
-
-Why it matters
---------------
-This block makes the routing structure of the entire app visible at
-a glance: a long single-page landing experience plus a handful of
-dedicated routes (Chatbot, Dashboard, Fisheries, Biodiversity,
-AdaptiveFusion, Visualizations).
+Top of App.jsx, the main file for the React frontend.
+Hooks come from React, routing from react-router-dom, and the page fade comes from framer-motion.
+All landing page sections (Navbar, Hero, About, Features, Pipeline, Chatbot, etc.) are imported here.
+Other pages like Dashboard and ChatbotPage are imported normally instead of lazy loaded to avoid blank screens.

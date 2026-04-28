@@ -1,43 +1,4 @@
-02_app_chat_endpoint.png — app.py: POST /api/chat handler
-==========================================================
-
-What this screen shows
-----------------------
-The main chat endpoint. It validates the incoming request, runs the
-user's message through both AI models, blends their confidence
-scores, and returns a structured JSON answer.
-
-Line-by-line walkthrough
-------------------------
-Lines 20–22 Route decorator binding the `chat()` function to
-            `POST /api/chat`. The docstring labels it the main entry
-            point.
-Lines 23–25 Reads the JSON body safely (`silent=True` means a
-            malformed body returns None instead of raising). If the
-            body is missing or has no `message` key, the API returns
-            HTTP 400 with a clear error.
-Lines 27–29 Coerces `message` to a string and trims whitespace. An
-            empty message is rejected with another 400.
-Lines 31–32 Hard length cap of 1000 characters to protect the model
-            from oversized payloads and keep latency predictable.
-Line  35    Calls the NLP engine to find the closest matching
-            knowledge-base entry (TF-IDF + cosine similarity). The
-            result includes the answer text, category, confidence,
-            and which question was matched.
-Line  37    Calls the intent classifier (Naive Bayes) to predict the
-            high-level intent category and its own confidence.
-Lines 40–42 Blends the two confidences using a weighted average:
-            **60% similarity, 40% intent**. Rounding to 4 decimals
-            keeps the JSON tidy. This blend is the project's signal
-            that the answer is trustworthy.
-Lines 44–51 Builds the response dictionary that the React frontend
-            expects: the answer text, the human-readable intent, the
-            internal intent code, the blended confidence, the matched
-            question (for transparency), and the topic category.
-Line  53    Returns the response with HTTP 200.
-
-Why it matters
---------------
-This is the heart of the API. Every chat message in the UI flows
-through these ~30 lines, which combine a similarity-based retriever
-with a probabilistic intent classifier into a single graceful answer.
+This is the /api/chat route that the chatbot UI sends every message to.
+First it checks the request: the message must exist, must not be empty, and must be 1000 chars or less.
+Then it runs the message through the NLP engine for similarity and the classifier for intent.
+The two confidence scores are mixed (60% NLP, 40% intent) and the final reply is sent back as JSON.

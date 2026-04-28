@@ -1,42 +1,4 @@
-13_app_routes.txt — App.jsx: App component & router
-=====================================================
-
-What this screen shows
-----------------------
-The exported `App` component. It declares every URL the SPA
-recognises and wires up two global utilities (auto scroll-to-top on
-route change, and a floating back-to-top button).
-
-Line-by-line walkthrough
-------------------------
-Line 193        `export default function App()` — the component the
-                Vite entry file mounts into the DOM.
-Line 195        `<BrowserRouter>` enables HTML5 history routing.
-Line 196        `<ScrollToTop />` is a small helper component used
-                inside the router that listens to URL changes and
-                resets `window.scrollTo(0, 0)` so each route opens at
-                the top.
-Lines 197–205   `<Routes>` block — one `<Route>` per URL:
-                  • `/`              → `<LandingPage />` (the long
-                                         scroll experience).
-                  • `/chatbot`       → `<ChatbotPage />`.
-                  • `/dashboard`     → `<Dashboard />`.
-                  • `/fisheries`     → `<FisheriesForecasting />`.
-                  • `/biodiversity`  → `<BiodiversityExplorer />`.
-                  • `/fusion`        → `<AdaptiveFusion />` (the
-                                         AEGFA pipeline view).
-                  • `/visualizations`→ `<InteractiveVisualizations />`.
-                The columns are deliberately aligned for readability.
-Line 206        `<GlobalBackToTop />` — a fixed-position button shown
-                on every route after a small scroll, using the
-                `ChevronUp` icon imported earlier.
-Line 207        Closes the router.
-Lines 208–209   Closes the JSX and the function.
-
-Why it matters
---------------
-This is the SPA's navigation contract. Anyone reviewing the project
-can read this single block and immediately know every page that
-exists and which component renders it. The two router-level helpers
-(`ScrollToTop`, `GlobalBackToTop`) keep navigation polish in one
-place rather than repeated inside every route component.
+This is the App function that exports the whole router setup.
+BrowserRouter wraps everything and ScrollToTop resets the scroll whenever the URL changes.
+Each Route line maps a path to a page: /chatbot, /dashboard, /fisheries, /biodiversity, /fusion, /visualizations.
+GlobalBackToTop is added at the end so the up arrow button shows on every page.
